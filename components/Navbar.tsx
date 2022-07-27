@@ -34,6 +34,8 @@ export default function Navbar() {
             aria-label='Options'
             icon={<HamburgerIcon w={6} h={6}/>}
             variant='ghost'
+            _hover={{background: 'transparent'}}
+            _active={{background: 'blackAlpha.100'}}
           />
           <MenuList maxW={2}>
             <MenuItem>
