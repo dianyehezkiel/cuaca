@@ -1,7 +1,8 @@
-import { Box, Heading, Highlight, Text, Link } from '@chakra-ui/react'
+import { Box, Text, Link } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import CurrentWeather from "../components/CurrentWeather";
 
 const Home: NextPage = () => {
   return (
@@ -12,32 +13,14 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box as='main' 
+      <Box as='main'
         minH='100vh' 
-        py='4rem' 
+        p={4}
         display='flex'
         flexDir='column'
-        justifyContent='center'
         alignItems='center'
       >
-        <Heading as='h1'
-          lineHeight='1.15'
-          fontSize='4rem'
-          textAlign='center'
-        >
-          Welcome to {' '}
-          <Box as='span' color='#4e6eb9'>
-            Cuaca
-          </Box>
-        </Heading>
-
-        <Text
-          my='4rem'
-          lineHeight='1.5'
-          fontSize='1.5rem'
-        >
-          Site currently on construction
-        </Text>
+        <CurrentWeather />
       </Box>
 
       <Box as='footer'
