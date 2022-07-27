@@ -7,7 +7,7 @@ export default function Navbar() {
     <Box
       as='header'
       py={2}
-      px={2}
+      px={4}
       bgColor='blue.100'
       display='flex'
       justifyContent='space-between'
