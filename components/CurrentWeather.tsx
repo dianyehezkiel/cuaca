@@ -5,12 +5,16 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Heading,
+  Heading, Image,
   Text
 } from "@chakra-ui/react";
-import {SunIcon, TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
+import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
+import {CurrentWeatherType} from "../types/CurrentWeather";
 
-export default function CurrentWeather() {
+export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
+  const now = Date.now()
+  const today = new Date(now)
+  const todayString = today.toLocaleDateString('id-ID', { weekday: "long", year: "2-digit", month: "short", day: "numeric" })
   return (
     <Box
       display='flex'
@@ -22,7 +26,7 @@ export default function CurrentWeather() {
       borderRadius={8}
       bgColor='blue.300'
     >
-      <Text px={4}>Medan, ID</Text>
+      <Text px={4} fontWeight='medium'>{`${data.name}, ${data.sys.country}`}</Text>
       <Box
         px={4}
         display='flex'
@@ -31,14 +35,20 @@ export default function CurrentWeather() {
         alignItems='center'
         justifyContent='space-evenly'
       >
-        <Box textAlign='center'>
-          <SunIcon w={20} h={20} mb={2}/>
-          <Text fontSize='sm'>Awan Pecah</Text>
+        <Box textAlign='center' display='flex' flexDir='column' alignItems='center'>
+          {/*TODO: Change open weather icon to other icon pack*/}
+          <Image
+            boxSize='5rem'
+            objectFit='fill'
+            src={`http://openweathermap.org/img/wn/${data.weather.icon}@2x.png`}
+            alt={data.weather.description}
+          />
+          <Text fontSize='sm' fontWeight='medium'>{data.weather.description}</Text>
         </Box>
         <Box textAlign='right'>
-          <Text>Rabu, 27 Juli</Text>
+          <Text>{todayString}</Text>
           <Box>
-            <Text fontSize='3xl'>28.9&deg;C</Text>
+            <Text fontSize='3xl' fontWeight='bold'>{data.main.temp.toFixed(1)}&deg;C</Text>
             <Box
               display='flex'
               justifyContent='space-between'
@@ -47,27 +57,27 @@ export default function CurrentWeather() {
             >
               <Box display='flex' alignItems='center'>
                 <TriangleUpIcon w={3} h={3} mr={1}/>
-                <Text fontSize='xs'>29.0&deg;</Text>
+                <Text fontSize='xs'>{data.main.temp_max.toFixed(1)}&deg;</Text>
               </Box>
               <Box display='flex' alignItems='center'>
                 <TriangleDownIcon w={3} h={3} mr={1}/>
-                <Text fontSize='xs'>28.9&deg;</Text>
+                <Text fontSize='xs'>{data.main.temp_min.toFixed(1)}&deg;</Text>
               </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-      <Box px={4} display='flex' justifyContent='space-between' w='100%'>
-        <Box display='flex' flexDir='column' alignItems='center'>
-          <Text fontSize='sm' fontWeight='medium'>34&deg;C</Text>
+      <Box px={2} display='flex' justifyContent='space-evenly' w='100%' alignItems='center'>
+        <Box display='flex' flexDir='column' alignItems='center' flex='1'>
+          <Text fontSize='sm' fontWeight='medium'>{data.main.feels_like.toFixed(1)}&deg;C</Text>
           <Text fontSize='xs'>Feels like</Text>
         </Box>
-        <Box display='flex' flexDir='column' alignItems='center'>
-          <Text fontSize='sm' fontWeight='medium'>79%</Text>
+        <Box display='flex' flexDir='column' alignItems='center' flex='1'>
+          <Text fontSize='sm' fontWeight='medium'>{data.main.humidity}%</Text>
           <Text fontSize='xs'>Humidity</Text>
         </Box>
-        <Box display='flex' flexDir='column' alignItems='center'>
-          <Text fontSize='sm' fontWeight='medium'>1007 hPa</Text>
+        <Box display='flex' flexDir='column' alignItems='center' flex='1'>
+          <Text fontSize='sm' fontWeight='medium'>{data.main.pressure} hPa</Text>
           <Text fontSize='xs'>Pressure</Text>
         </Box>
       </Box>
@@ -80,15 +90,19 @@ export default function CurrentWeather() {
                 <AccordionIcon />
               </Box>
             </AccordionButton>
-            <AccordionPanel px={4}>
-              <Box display='flex' justifyContent='space-around' w='100%'>
-                <Box display='flex' flexDir='column' alignItems='center'>
-                  <Text fontSize='sm' fontWeight='medium'>4.12 m/s</Text>
+            <AccordionPanel px={2}>
+              <Box display='flex' justifyContent='space-evenly' w='100%' alignItems='center'>
+                <Box display='flex' flexDir='column' alignItems='center' flex='1'>
+                  <Text fontSize='sm' fontWeight='medium'>{data.wind.speed} m/s</Text>
                   <Text fontSize='xs'>Wind Speed</Text>
                 </Box>
-                <Box display='flex' flexDir='column' alignItems='center'>
-                  <Text fontSize='sm' fontWeight='medium'>90&deg;</Text>
+                <Box display='flex' flexDir='column' alignItems='center' flex='1'>
+                  <Text fontSize='sm' fontWeight='medium'>{data.wind.deg}&deg;</Text>
                   <Text fontSize='xs'>Wind Direction</Text>
+                </Box>
+                <Box display='flex' flexDir='column' alignItems='center' flex='1'>
+                  <Text fontSize='sm' fontWeight='medium'>{(data.visibility / 1000).toFixed(1)} km</Text>
+                  <Text fontSize='xs'>Visibility</Text>
                 </Box>
               </Box>
             </AccordionPanel>
