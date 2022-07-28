@@ -5,12 +5,15 @@ import Image from 'next/image'
 import CurrentWeather from "../components/CurrentWeather";
 import {CurrentWeatherFromApi, CurrentWeatherType} from "../types/CurrentWeather";
 import axios from "axios";
-import {toCurrentWeather} from "../utils";
+import {toCurrentWeather, toWeatherForecast} from "../utils";
 import parseJson from "parse-json";
+import WeatherForecasts from "../components/WeatherForecasts";
+import {WeatherForecastType, WeatherForecastFromApi} from "../types/WeatherForecast";
 
-const WEATHER_BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
+const BASE_URL = 'https://api.openweathermap.org'
 interface HomeProps {
   currentWeather: CurrentWeatherType;
+  weatherForecast: WeatherForecastType;
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -22,13 +25,21 @@ export const getServerSideProps: GetServerSideProps = async () => {
     appid: process.env.API_KEY,
   }
 
-  const weatherFromApi = await axios.get<CurrentWeatherFromApi>(WEATHER_BASE_URL, { params })
-  const currentWeather = toCurrentWeather(weatherFromApi.data);
+  const weatherFromApi = await axios.get<CurrentWeatherFromApi>(`${BASE_URL}/data/2.5/weather`, { params })
+  const forecastFromApi = await axios.get<WeatherForecastFromApi>(`${BASE_URL}/data/2.5/forecast`, { params })
 
-  return { props: { currentWeather: parseJson(JSON.stringify(currentWeather)) }}
+  const currentWeather = toCurrentWeather(weatherFromApi.data);
+  const weatherForecast = toWeatherForecast(forecastFromApi.data);
+
+  return {
+    props: {
+      currentWeather: parseJson(JSON.stringify(currentWeather)),
+      weatherForecast: parseJson(JSON.stringify(weatherForecast)),
+    }
+  }
 }
 
-export default function Home ({ currentWeather }: HomeProps) {
+export default function Home ({ currentWeather, weatherForecast }: HomeProps) {
   return (
     <div>
       <Head>
@@ -43,8 +54,10 @@ export default function Home ({ currentWeather }: HomeProps) {
         display='flex'
         flexDir='column'
         alignItems='center'
+        gap={4}
       >
         <CurrentWeather data={currentWeather} />
+        <WeatherForecasts data={weatherForecast}/>
       </Box>
 
       <Box as='footer'
