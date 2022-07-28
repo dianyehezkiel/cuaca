@@ -38,7 +38,7 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
         <Box textAlign='center' display='flex' flexDir='column' alignItems='center'>
           {/*TODO: Change open weather icon to other icon pack*/}
           <Image
-            boxSize='5rem'
+            boxSize={20}
             objectFit='fill'
             src={`http://openweathermap.org/img/wn/${data.weather.icon}@2x.png`}
             alt={data.weather.description}
