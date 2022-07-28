@@ -1,50 +1,17 @@
-interface Coordinat {
-  lon: number;
-  lat: number;
-}
-
-interface WeatherData {
-  id: number;
-  main: string;
-  description: string;
-  icon: string;
-}
-
-interface MainInfo {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  humidity: number;
-  sea_level?: number;
-  grnd_level?: number;
-}
-
-interface WindData {
-  speed: number;
-  deg: number;
-  gust?: number;
-}
-
-interface CloudData {
-  all: number;
-}
-
-interface RainData {
-  "1h"?: number;
-  "3h"?: number;
-}
-
-interface SnowData {
-  "1h"?: number;
-  "3h"?: number;
-}
+import {
+  MainInfo,
+  Coordinat,
+  WeatherData,
+  WindData,
+  CloudData,
+  RainData,
+  SnowData,
+} from "./UniversalTypes";
 
 interface SystemData {
   type: number;
   id: number;
-  message?: string;
+  message?: string | number;
   country: string;
   sunrise: number;
   sunset: number;
@@ -65,7 +32,7 @@ export interface CurrentWeatherFromApi {
   timezone: number;
   id: number;
   name: string;
-  cod: number;
+  cod: number | string;
 }
 
 export interface CurrentWeatherType extends Omit<CurrentWeatherFromApi, 'weather' | 'coord' | 'base' | 'timezone' | 'id' | 'cod'> {
