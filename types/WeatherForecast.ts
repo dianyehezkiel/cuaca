@@ -1,4 +1,4 @@
-import {CloudData, Coordinat, MainInfo, RainData, SnowData, WeatherData, WindData} from "./UniversalTypes";
+import {CloudData, Coordinate, MainInfo, RainData, SnowData, WeatherData, WindData} from "./UniversalTypes";
 
 interface ForecastMainInfo extends MainInfo {
   temp_kf: number;
@@ -11,7 +11,7 @@ interface SystemData {
 interface CityData {
   id: number;
   name: string;
-  coord: Coordinat;
+  coord: Coordinate;
   country: string;
   population: number;
   timezone: number;
@@ -19,7 +19,7 @@ interface CityData {
   sunset: number;
 }
 
-interface ForecastData {
+export interface ForecastData {
   dt: number;
   main: ForecastMainInfo;
   weather: WeatherData[];
@@ -42,3 +42,8 @@ export interface WeatherForecastFromApi {
 }
 // TODO: get rid of array of WeatherData (on ForecastData type)
 export type WeatherForecastType = Omit<WeatherForecastFromApi, 'cod' | 'message' | 'cnt' | 'city'>
+
+export interface DailyForecast {
+  day: number;
+  forecast: ForecastData[];
+}
