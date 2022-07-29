@@ -19,10 +19,10 @@ export default function WeatherForecast(
       display='flex'
       flexDir='column'
       alignItems='center'
-      bgColor='whiteAlpha.400'
+      borderColor='blackAlpha.500'
       minW={16}
     >
-      <Text fontSize='sm'>{formattedHour}</Text>
+      <Text fontSize='xs'>{formattedHour}</Text>
       {/*TODO: Change open weather icon to other icon pack*/}
       <Image
         boxSize={12}

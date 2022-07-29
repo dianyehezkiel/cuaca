@@ -54,7 +54,8 @@ export default function Home ({ currentWeather, weatherForecast }: HomeProps) {
         display='flex'
         flexDir='column'
         alignItems='center'
-        gap={4}
+        gap={2}
+        bg='blue.300'
       >
         <CurrentWeather data={currentWeather} />
         <WeatherForecasts data={weatherForecast}/>
