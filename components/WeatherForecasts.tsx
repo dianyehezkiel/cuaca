@@ -13,20 +13,25 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
       const today = new Date()
       const sortedData: DailyForecast[] = []
 
-      data.list.map((f) => {
+      data.list.map((f, i) => {
         const dataDate = new Date(f.dt * 1000)
         const diff = dataDate.getDay() - today.getDay()
         const index = diff >= 0 ? diff : diff + 7
 
-        console.log(diff, index)
+        if (i === 0 && index === 1) {
+          sortedData.push({
+            day: today.getDay(),
+            forecast: []
+          })
+        }
+
         if (!sortedData[index]) {
           sortedData.push({
             day: dataDate.getDay(),
             forecast: [],
           })
         }
-        console.log(sortedData)
-        
+
         sortedData[index].forecast.push(f)
       })
 
@@ -35,7 +40,6 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
     
     setForecastData(sortForecastData())
   }, [data])
-
 
   const setForecastItem = (forecast: ForecastData, index: number) => {
     return (
@@ -57,18 +61,20 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
     return (
       <>
         {sortedData.map((df, i) => {
+          if (df.forecast.length === 0) {
+            return null;
+          }
+
           const formattedDays = () => {
             if (i === 0) {
               return 'Today'
             }
-
             if (i === 1) {
               return 'Tomorrow'
             }
-
             return days[df.day]
-            
           }
+
           return (
             <Box 
               key={df.day}
