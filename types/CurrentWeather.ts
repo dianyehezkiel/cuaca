@@ -1,6 +1,6 @@
 import {
   MainInfo,
-  Coordinat,
+  Coordinate,
   WeatherData,
   WindData,
   CloudData,
@@ -18,7 +18,7 @@ interface SystemData {
 }
 
 export interface CurrentWeatherFromApi {
-  coord: Coordinat;
+  coord: Coordinate;
   weather: WeatherData[];
   base: string;
   main: MainInfo;
