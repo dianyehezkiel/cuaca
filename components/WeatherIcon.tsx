@@ -3,6 +3,8 @@ import LightningDayIcon from "./icons/day/LightningDayIcon"
 import RainDayIcon from "./icons/day/RainDayIcon"
 import RainMixDayIcon from "./icons/day/RainMixDayIcon"
 import ShowersDayIcon from "./icons/day/ShowersDayIcon"
+import SleetDayIcon from "./icons/day/SleetDayIcon"
+import SnowDayIcon from "./icons/day/SnowDayIcon"
 import SprinkleDayIcon from "./icons/day/SprinkleDayIcon"
 import StormShowersDayIcon from "./icons/day/StormShowersDayIcon"
 import ThunderstormDayIcon from "./icons/day/ThunderstormDayIcon"
@@ -11,12 +13,16 @@ import LightningNightIcon from "./icons/night/LightningNightIcon"
 import RainMixNightIcon from "./icons/night/RainMixNightIcon"
 import RainNightIcon from "./icons/night/RainNightIcon"
 import ShowersNightIcon from "./icons/night/ShowersNightIcon"
+import SleetNightIcon from "./icons/night/SleetNightIcon"
+import SnowNightIcon from "./icons/night/SnowNightIcon"
 import SprinkleNightIcon from "./icons/night/SprinkleNightIcon"
 import StormShowersNightIcon from "./icons/night/StormShowersNightIcon"
 import ThunderstormNightIcon from "./icons/night/ThunderstormNightIcon"
 import RainIcon from "./icons/RainIcon"
 import RainMixIcon from "./icons/RainMixIcon"
 import ShowersIcon from "./icons/ShowersIcon"
+import SleetIcon from "./icons/SleetIcon"
+import SnowIcon from "./icons/SnowIcon"
 import SprinkleIcon from "./icons/SprinkleIcon"
 import StormShowersIcon from "./icons/StormShowersIcon"
 import ThunderstormIcon from "./icons/Thunderstorm"
@@ -64,6 +70,11 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <RainIcon {...iconProps} />
       case 310:
       case 511:
+      case 611:
+      case 612:
+      case 615:
+      case 616:
+      case 620:
         return <RainMixIcon {...iconProps} />
       case 313:
       case 520:
@@ -72,6 +83,13 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <ShowersIcon {...iconProps} />
       case 531:
         return <StormShowersIcon {...iconProps} />
+      case 600:
+      case 601:
+      case 621:
+      case 622:
+        return <SnowIcon {...iconProps} />
+      case 602:
+        return <SleetIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
@@ -108,6 +126,11 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <RainDayIcon {...iconProps} />
       case 310:
       case 511:
+      case 611:
+      case 612:
+      case 615:
+      case 616:
+      case 620:
         return <RainMixDayIcon {...iconProps} />
       case 313:
       case 520:
@@ -116,6 +139,13 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <ShowersDayIcon {...iconProps} />
       case 531:
         return <StormShowersDayIcon {...iconProps} />
+      case 600:
+      case 601:
+      case 621:
+      case 622:
+        return <SnowDayIcon {...iconProps} />
+      case 602:
+        return <SleetDayIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
@@ -150,6 +180,11 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <RainNightIcon {...iconProps} />
       case 310:
       case 511:
+      case 611:
+      case 612:
+      case 615:
+      case 616:
+      case 620:
         return <RainMixNightIcon {...iconProps} />
       case 313:
       case 520:
@@ -158,6 +193,13 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <ShowersNightIcon {...iconProps} />
       case 531:
         return <StormShowersNightIcon {...iconProps} />
+      case 600:
+      case 601:
+      case 621:
+      case 622:
+        return <SnowNightIcon {...iconProps} />
+      case 602:
+        return <SleetNightIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
