@@ -1,4 +1,8 @@
 import { Icon, IconProps } from "@chakra-ui/react"
+import CloudyGustsIcon from "./icons/CloudyGustsIcon"
+import CloudyGustsDayIcon from "./icons/day/CloudyGustsDayIcon"
+import FogDayIcon from "./icons/day/FogDayIcon"
+import HazeDayIcon from "./icons/day/HazeDayIcon"
 import LightningDayIcon from "./icons/day/LightningDayIcon"
 import RainDayIcon from "./icons/day/RainDayIcon"
 import RainMixDayIcon from "./icons/day/RainMixDayIcon"
@@ -8,7 +12,11 @@ import SnowDayIcon from "./icons/day/SnowDayIcon"
 import SprinkleDayIcon from "./icons/day/SprinkleDayIcon"
 import StormShowersDayIcon from "./icons/day/StormShowersDayIcon"
 import ThunderstormDayIcon from "./icons/day/ThunderstormDayIcon"
+import DustIcon from "./icons/DustIcon"
+import FogIcon from "./icons/FogIcon"
 import LightningIcon from "./icons/LightningIcon"
+import CloudyGustsNightIcon from "./icons/night/CloudyGustsNightIcon"
+import FogNightIcon from "./icons/night/FogNightIcon"
 import LightningNightIcon from "./icons/night/LightningNightIcon"
 import RainMixNightIcon from "./icons/night/RainMixNightIcon"
 import RainNightIcon from "./icons/night/RainNightIcon"
@@ -22,10 +30,12 @@ import RainIcon from "./icons/RainIcon"
 import RainMixIcon from "./icons/RainMixIcon"
 import ShowersIcon from "./icons/ShowersIcon"
 import SleetIcon from "./icons/SleetIcon"
+import SmokeIcon from "./icons/SmokeIcon"
 import SnowIcon from "./icons/SnowIcon"
 import SprinkleIcon from "./icons/SprinkleIcon"
 import StormShowersIcon from "./icons/StormShowersIcon"
 import ThunderstormIcon from "./icons/Thunderstorm"
+import TornadoIcon from "./icons/TornadoIcon"
 
 interface WeatherIconProps extends IconProps {
   weatherId: number | string,
@@ -80,6 +90,7 @@ export default function WeatherIcon(props: WeatherIconProps ) {
       case 520:
       case 521:
       case 522:
+      case 701:
         return <ShowersIcon {...iconProps} />
       case 531:
         return <StormShowersIcon {...iconProps} />
@@ -90,6 +101,20 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <SnowIcon {...iconProps} />
       case 602:
         return <SleetIcon {...iconProps} />
+      case 711:
+        return <SmokeIcon {...iconProps} />
+      case 721:
+        return <HazeDayIcon {...iconProps} />
+      case 731:
+      case 761:
+      case 762:
+        return <DustIcon {...iconProps} />
+      case 741:
+        return <FogIcon {...iconProps} />
+      case 771:
+        return <CloudyGustsIcon {...iconProps} />
+      case 781:
+        return <TornadoIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
@@ -136,6 +161,7 @@ export default function WeatherIcon(props: WeatherIconProps ) {
       case 520:
       case 521:
       case 522:
+      case 701:
         return <ShowersDayIcon {...iconProps} />
       case 531:
         return <StormShowersDayIcon {...iconProps} />
@@ -146,6 +172,20 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <SnowDayIcon {...iconProps} />
       case 602:
         return <SleetDayIcon {...iconProps} />
+      case 711:
+        return <SmokeIcon {...iconProps} />
+      case 721:
+        return <HazeDayIcon {...iconProps} />
+      case 731:
+      case 761:
+      case 762:
+        return <DustIcon {...iconProps} />
+      case 741:
+        return <FogDayIcon {...iconProps} />
+      case 771:
+        return <CloudyGustsDayIcon {...iconProps} />
+      case 781:
+        return <TornadoIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
@@ -190,6 +230,7 @@ export default function WeatherIcon(props: WeatherIconProps ) {
       case 520:
       case 521:
       case 522:
+      case 701:
         return <ShowersNightIcon {...iconProps} />
       case 531:
         return <StormShowersNightIcon {...iconProps} />
@@ -200,6 +241,20 @@ export default function WeatherIcon(props: WeatherIconProps ) {
         return <SnowNightIcon {...iconProps} />
       case 602:
         return <SleetNightIcon {...iconProps} />
+      case 711:
+        return <SmokeIcon {...iconProps} />
+      case 721:
+        return <HazeDayIcon {...iconProps} />
+      case 731:
+      case 761:
+      case 762:
+        return <DustIcon {...iconProps} />
+      case 741:
+        return <FogNightIcon {...iconProps} />
+      case 771:
+        return <CloudyGustsNightIcon {...iconProps} />
+      case 781:
+        return <TornadoIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
