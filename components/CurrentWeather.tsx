@@ -10,11 +10,19 @@ import {
 } from "@chakra-ui/react";
 import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
 import {CurrentWeatherType} from "../types/CurrentWeather";
+import WeatherIcon from "./WeatherIcon";
 
 export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
   const now = Date.now()
   const today = new Date(now)
   const todayString = today.toLocaleDateString('id-ID', { weekday: "long", year: "2-digit", month: "short", day: "numeric" })
+
+  const day = () => {
+    if (data.weather.icon.endsWith('d')) return true
+    if (data.weather.icon.endsWith('n')) return false
+    return undefined
+  }
+
   return (
     <Box
       display='flex'
@@ -37,13 +45,7 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
         justifyContent='space-evenly'
       >
         <Box textAlign='center' display='flex' flexDir='column' alignItems='center'>
-          {/*TODO: Change open weather icon to other icon pack*/}
-          <Image
-            boxSize={20}
-            objectFit='fill'
-            src={`http://openweathermap.org/img/wn/${data.weather.icon}@2x.png`}
-            alt={data.weather.description}
-          />
+          <WeatherIcon boxSize={20} weatherId={data.weather.id} day={day()} />
           <Text fontSize='sm' fontWeight='medium'>{data.weather.description}</Text>
         </Box>
         <Box textAlign='right'>
@@ -52,7 +54,7 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
             <Text fontSize='3xl' fontWeight='bold'>{data.main.temp.toFixed(1)}&deg;C</Text>
             <Box
               display='flex'
-              justifyContent='space-between'
+              justifyContent='flex-end'
               gap={2}
               alignItems='center'
             >
