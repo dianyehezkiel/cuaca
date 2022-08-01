@@ -1,5 +1,6 @@
 import { Icon, IconProps } from "@chakra-ui/react"
 import CloudyGustsIcon from "./icons/CloudyGustsIcon"
+import CloudyIcon from "./icons/CloudyIcon"
 import CloudyGustsDayIcon from "./icons/day/CloudyGustsDayIcon"
 import FogDayIcon from "./icons/day/FogDayIcon"
 import HazeDayIcon from "./icons/day/HazeDayIcon"
@@ -11,11 +12,15 @@ import SleetDayIcon from "./icons/day/SleetDayIcon"
 import SnowDayIcon from "./icons/day/SnowDayIcon"
 import SprinkleDayIcon from "./icons/day/SprinkleDayIcon"
 import StormShowersDayIcon from "./icons/day/StormShowersDayIcon"
+import SunnyDayIcon from "./icons/day/SunnyDayIcon"
+import SunnyOvercastDayIcon from "./icons/day/SunnyOvercastDayIcon"
 import ThunderstormDayIcon from "./icons/day/ThunderstormDayIcon"
 import DustIcon from "./icons/DustIcon"
 import FogIcon from "./icons/FogIcon"
 import LightningIcon from "./icons/LightningIcon"
+import ClearNightIcon from "./icons/night/ClearNightIcon"
 import CloudyGustsNightIcon from "./icons/night/CloudyGustsNightIcon"
+import CloudyNightIcon from "./icons/night/CloudyNightIcon"
 import FogNightIcon from "./icons/night/FogNightIcon"
 import LightningNightIcon from "./icons/night/LightningNightIcon"
 import RainMixNightIcon from "./icons/night/RainMixNightIcon"
@@ -112,9 +117,16 @@ export default function WeatherIcon(props: WeatherIconProps ) {
       case 741:
         return <FogIcon {...iconProps} />
       case 771:
+      case 801:
+      case 802:
+      case 803:
         return <CloudyGustsIcon {...iconProps} />
       case 781:
         return <TornadoIcon {...iconProps} />
+      case 800:
+        return <SunnyDayIcon {...iconProps} />
+      case 804:
+        return <CloudyIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
@@ -183,9 +195,16 @@ export default function WeatherIcon(props: WeatherIconProps ) {
       case 741:
         return <FogDayIcon {...iconProps} />
       case 771:
+      case 801:
+      case 802:
+      case 803:
         return <CloudyGustsDayIcon {...iconProps} />
       case 781:
         return <TornadoIcon {...iconProps} />
+      case 800:
+        return <SunnyDayIcon {...iconProps} />
+      case 804:
+        return <SunnyOvercastDayIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
@@ -252,9 +271,16 @@ export default function WeatherIcon(props: WeatherIconProps ) {
       case 741:
         return <FogNightIcon {...iconProps} />
       case 771:
+      case 801:
+      case 802:
+      case 803:
         return <CloudyGustsNightIcon {...iconProps} />
       case 781:
         return <TornadoIcon {...iconProps} />
+      case 800:
+        return <ClearNightIcon {...iconProps} />
+      case 804:
+        return <CloudyNightIcon {...iconProps} />
       default:
         // TODO: Change fallback icon
         return <Icon {...iconProps}/>
