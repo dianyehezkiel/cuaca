@@ -50,6 +50,7 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
       >
         <WeatherForecast
           time={forecast.dt}
+          weatherId={forecast.weather[0].id}
           iconCode={forecast.weather[0].icon}
           temperature={forecast.main.temp}
         />
