@@ -8,13 +8,14 @@ export default function Navbar() {
       as='header'
       py={2}
       px={4}
-      bgColor='blue.100'
+      bgColor='blue.200'
       display='flex'
       justifyContent='space-between'
       alignItems='center'
       position='sticky'
       top={0}
       zIndex={999}
+      shadow='lg'
     >
       <NextLink href='/'>
         <Link fontSize='xl' fontWeight='bold'>Cuaca</Link>
@@ -37,7 +38,7 @@ export default function Navbar() {
             _hover={{background: 'transparent'}}
             _active={{background: 'blackAlpha.100'}}
           />
-          <MenuList maxW={2}>
+          <MenuList bg='blue.100'>
             <MenuItem>
               <NextLink href='/'>
                 <Link>Beranda</Link>
