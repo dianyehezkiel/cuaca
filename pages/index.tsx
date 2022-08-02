@@ -5,41 +5,50 @@ import Image from 'next/image'
 import CurrentWeather from "../components/CurrentWeather";
 import {CurrentWeatherFromApi, CurrentWeatherType} from "../types/CurrentWeather";
 import axios from "axios";
-import {toCurrentWeather, toWeatherForecast} from "../utils";
+import {toAirQualityIndex, toCurrentWeather, toWeatherForecast} from "../utils";
 import parseJson from "parse-json";
 import WeatherForecasts from "../components/WeatherForecasts";
 import {WeatherForecastType, WeatherForecastFromApi} from "../types/WeatherForecast";
+import AirQualityIndex from '../components/AirQualityIndex';
+import { AirQualityIndexType, AirQualityIndexFromApi } from '../types/AirQualityIndex';
 
 const BASE_URL = 'https://api.openweathermap.org'
 interface HomeProps {
   currentWeather: CurrentWeatherType;
   weatherForecast: WeatherForecastType;
+  airQualityIndex: AirQualityIndexType;
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const params = {
+  const aqiParams = {
     lat: 3.5896654,
     lon: 98.6738261,
-    units: 'metric',
-    lang: 'id',
     appid: process.env.API_KEY,
   }
+  const weatherParams = {
+    ...aqiParams,
+    units: 'metric',
+    lang: 'id',
+  }
 
-  const weatherFromApi = await axios.get<CurrentWeatherFromApi>(`${BASE_URL}/data/2.5/weather`, { params })
-  const forecastFromApi = await axios.get<WeatherForecastFromApi>(`${BASE_URL}/data/2.5/forecast`, { params })
+  const weatherFromApi = await axios.get<CurrentWeatherFromApi>(`${BASE_URL}/data/2.5/weather`, { params: weatherParams })
+  const forecastFromApi = await axios.get<WeatherForecastFromApi>(`${BASE_URL}/data/2.5/forecast`, { params: weatherParams })
+  const aqiFromApi = await axios.get<AirQualityIndexFromApi>(`${BASE_URL}/data/2.5/air_pollution`, { params: aqiParams })
 
-  const currentWeather = toCurrentWeather(weatherFromApi.data);
-  const weatherForecast = toWeatherForecast(forecastFromApi.data);
+  const currentWeather = toCurrentWeather(weatherFromApi.data)
+  const weatherForecast = toWeatherForecast(forecastFromApi.data)
+  const airQualityIndex = toAirQualityIndex(aqiFromApi.data)
 
   return {
     props: {
       currentWeather: parseJson(JSON.stringify(currentWeather)),
       weatherForecast: parseJson(JSON.stringify(weatherForecast)),
+      airQualityIndex: parseJson(JSON.stringify(airQualityIndex)),
     }
   }
 }
 
-export default function Home ({ currentWeather, weatherForecast }: HomeProps) {
+export default function Home ({ currentWeather, weatherForecast, airQualityIndex }: HomeProps) {
   return (
     <div>
       <Head>
@@ -59,6 +68,7 @@ export default function Home ({ currentWeather, weatherForecast }: HomeProps) {
       >
         <CurrentWeather data={currentWeather} />
         <WeatherForecasts data={weatherForecast}/>
+        <AirQualityIndex data={airQualityIndex}/>
       </Box>
 
       <Box as='footer'
