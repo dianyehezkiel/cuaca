@@ -22,6 +22,6 @@ export interface AirQualityIndexFromApi {
   list: AirQualityData[];
 }
 
-export interface AirQualityIndex {
+export interface AirQualityIndexType {
   aqiData: AirQualityData;
 }
