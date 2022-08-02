@@ -6,7 +6,7 @@ import React from "react";
 export default function WeatherForecasts({ data }: { data: WeatherForecastType }) {
   const [forecastData, setForecastData] = React.useState<DailyForecast[]>([])
 
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu']
 
   React.useEffect(() => {
     const sortForecastData = () => {
@@ -68,10 +68,10 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
 
           const formattedDays = () => {
             if (i === 0) {
-              return 'Today'
+              return 'Hari ini'
             }
             if (i === 1) {
-              return 'Tomorrow'
+              return 'Besok'
             }
             return days[df.day]
           }
@@ -101,7 +101,7 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
       bgColor='whiteAlpha.400'
       shadow='lg'
     >
-      <Text fontSize='md' fontWeight='medium' align='center' my={1}>Forecast</Text>
+      <Text fontSize='md' fontWeight='medium' align='center' my={1}>Prediksi Cuaca</Text>
       <HStack
         overflowX='auto'
         spacing={0}

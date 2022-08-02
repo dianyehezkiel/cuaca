@@ -81,7 +81,7 @@ export default function Home ({ currentWeather, weatherForecast, airQualityIndex
         alignItems='center'
       >
         <Text>
-          Created by
+          Dibuat oleh
           <Link
             href="https://dianyehezkiel.me"
             target="_blank"

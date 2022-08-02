@@ -21,10 +21,10 @@ export default function Navbar() {
       </NextLink>
       <Box as='nav' display={{base: 'none', md: 'flex'}} gap={4} alignItems='center'>
         <NextLink href='/'>
-          <Link fontWeight='bold'>Home</Link>
+          <Link fontWeight='bold'>Beranda</Link>
         </NextLink>
         <NextLink href='/about'>
-          <Link fontWeight='bold'>About</Link>
+          <Link fontWeight='bold'>Tentang</Link>
         </NextLink>
       </Box>
       <Box as='nav' display={{base: 'flex', md: 'none'}} gap='8px' alignItems='center'>
@@ -40,12 +40,12 @@ export default function Navbar() {
           <MenuList maxW={2}>
             <MenuItem>
               <NextLink href='/'>
-                <Link>Home</Link>
+                <Link>Beranda</Link>
               </NextLink>
             </MenuItem>
             <MenuItem>
               <NextLink href='/about'>
-                <Link>About</Link>
+                <Link>Tentang</Link>
               </NextLink>
             </MenuItem>
           </MenuList>

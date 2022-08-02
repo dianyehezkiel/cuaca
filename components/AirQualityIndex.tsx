@@ -60,7 +60,7 @@ export default function AirQualityIndex({ data }: { data: AirQualityIndexType })
       bgColor='whiteAlpha.400'
       shadow='lg'
     >
-      <Text my={1} fontSize='md' fontWeight='medium'>Air Quality Index</Text>
+      <Text my={1} fontSize='md' fontWeight='medium'>Indeks Kualitas Udara</Text>
       <Box
         mb={2}
         px={4}

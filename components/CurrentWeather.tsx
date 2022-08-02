@@ -73,15 +73,15 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
       <Box px={2} display='flex' justifyContent='space-evenly' w='100%' alignItems='center'>
         <Box display='flex' flexDir='column' alignItems='center' flex='1'>
           <Text fontSize='sm' fontWeight='medium'>{data.main.feels_like.toFixed(1)}&deg;C</Text>
-          <Text fontSize='xs'>Feels like</Text>
+          <Text fontSize='xs'>Suhu Terasa</Text>
         </Box>
         <Box display='flex' flexDir='column' alignItems='center' flex='1'>
           <Text fontSize='sm' fontWeight='medium'>{data.main.humidity}%</Text>
-          <Text fontSize='xs'>Humidity</Text>
+          <Text fontSize='xs'>Kelembapan</Text>
         </Box>
         <Box display='flex' flexDir='column' alignItems='center' flex='1'>
           <Text fontSize='sm' fontWeight='medium'>{data.main.pressure} hPa</Text>
-          <Text fontSize='xs'>Pressure</Text>
+          <Text fontSize='xs'>Tekanan</Text>
         </Box>
       </Box>
       <Accordion allowToggle w='100%'>
@@ -89,7 +89,7 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
           <Heading as='h6' fontWeight='normal'>
             <AccordionButton fontSize='xs' justifyContent='space-around' _expanded={{background: 'blackAlpha.100'}} _hover={{background: 'transparent'}}>
               <Box display='flex' alignItems='center' gap={1}>
-                Show more
+                lebih lanjut
                 <AccordionIcon />
               </Box>
             </AccordionButton>
@@ -97,15 +97,15 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
               <Box display='flex' justifyContent='space-evenly' w='100%' alignItems='center'>
                 <Box display='flex' flexDir='column' alignItems='center' flex='1'>
                   <Text fontSize='sm' fontWeight='medium'>{data.wind.speed} m/s</Text>
-                  <Text fontSize='xs'>Wind Speed</Text>
+                  <Text fontSize='xs'>Kcptn. Udara</Text>
                 </Box>
                 <Box display='flex' flexDir='column' alignItems='center' flex='1'>
                   <Text fontSize='sm' fontWeight='medium'>{data.wind.deg}&deg;</Text>
-                  <Text fontSize='xs'>Wind Direction</Text>
+                  <Text fontSize='xs'>Arah Udara</Text>
                 </Box>
                 <Box display='flex' flexDir='column' alignItems='center' flex='1'>
                   <Text fontSize='sm' fontWeight='medium'>{(data.visibility / 1000).toFixed(1)} km</Text>
-                  <Text fontSize='xs'>Visibility</Text>
+                  <Text fontSize='xs'>Visibilitas</Text>
                 </Box>
               </Box>
             </AccordionPanel>
