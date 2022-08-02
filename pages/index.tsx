@@ -1,7 +1,6 @@
-import { Box, Text, Link } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import type {GetServerSideProps} from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import CurrentWeather from "../components/CurrentWeather";
 import {CurrentWeatherFromApi, CurrentWeatherType} from "../types/CurrentWeather";
 import axios from "axios";
@@ -69,36 +68,6 @@ export default function Home ({ currentWeather, weatherForecast, airQualityIndex
         <CurrentWeather data={currentWeather} />
         <WeatherForecasts data={weatherForecast}/>
         <AirQualityIndex data={airQualityIndex}/>
-      </Box>
-
-      <Box as='footer'
-        display='flex'
-        flex={1}
-        py='2rem'
-        borderTop='1px'
-        borderTopColor='#eaeaea'
-        justifyContent='center'
-        alignItems='center'
-      >
-        <Text>
-          Dibuat oleh
-          <Link
-            href="https://dianyehezkiel.me"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Box
-              as='span'
-              display='inline'
-              h='1rem'
-              ml='0.5rem'
-              mr='0.25rem'
-            >
-              <Image src="/dy-logo.svg" alt="DY Logo" width={32} height={16} />
-            </Box>
-            Dian Yehezkiel
-          </Link>
-        </Text>
       </Box>
     </div>
   )
