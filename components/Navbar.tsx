@@ -6,19 +6,20 @@ export default function Navbar() {
   return (
     <Box
       as='header'
-      py={2}
+      py={{base: 1, md: 2}}
       px={4}
       bgColor='blue.200'
       display='flex'
       justifyContent='space-between'
       alignItems='center'
-      position='sticky'
-      top={0}
+      pos='absolute'
+      top='0'
+      w='100%'
       zIndex={999}
       shadow='lg'
     >
       <NextLink href='/'>
-        <Link fontSize='xl' fontWeight='bold'>Cuaca</Link>
+        <Link fontSize='xl' lineHeight={8} fontWeight='bold'>Cuaca</Link>
       </NextLink>
       <Box as='nav' display={{base: 'none', md: 'flex'}} gap={4} alignItems='center'>
         <NextLink href='/'>

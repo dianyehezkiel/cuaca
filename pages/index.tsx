@@ -58,8 +58,10 @@ export default function Home ({ currentWeather, weatherForecast, airQualityIndex
       </Head>
 
       <Box as='main'
-        minH='100vh' 
-        p={4}
+        minH='100vh'
+        pt={16}
+        pb={24}
+        px={4}
         display='flex'
         flexDir='column'
         alignItems='center'
