@@ -35,7 +35,6 @@ export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
       bgColor='whiteAlpha.400'
       shadow='lg'
     >
-      <Text px={4} fontWeight='medium'>{`${data.name}, ${data.sys.country}`}</Text>
       <Box
         px={4}
         display='flex'

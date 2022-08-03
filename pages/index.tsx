@@ -10,6 +10,7 @@ import WeatherForecasts from "../components/WeatherForecasts";
 import {WeatherForecastType, WeatherForecastFromApi} from "../types/WeatherForecast";
 import AirQualityIndex from '../components/AirQualityIndex';
 import { AirQualityIndexType, AirQualityIndexFromApi } from '../types/AirQualityIndex';
+import SearchBar from '../components/SearchBar';
 
 const BASE_URL = 'https://api.openweathermap.org'
 interface HomeProps {
@@ -65,6 +66,7 @@ export default function Home ({ currentWeather, weatherForecast, airQualityIndex
         gap={2}
         bg='blue.300'
       >
+        <SearchBar />
         <CurrentWeather data={currentWeather} />
         <WeatherForecasts data={weatherForecast}/>
         <AirQualityIndex data={airQualityIndex}/>

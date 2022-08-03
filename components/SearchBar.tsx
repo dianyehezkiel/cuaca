@@ -1,4 +1,4 @@
-import { CloseIcon, EditIcon } from "@chakra-ui/icons"
+import { CloseIcon, EditIcon, Search2Icon, SearchIcon } from "@chakra-ui/icons"
 import { Box, ButtonGroup, Editable, EditableInput, EditablePreview, Flex, IconButton, Input, useEditableControls } from "@chakra-ui/react"
 
 export default function SearchBar() {
@@ -27,7 +27,7 @@ export default function SearchBar() {
           _hover={{bg: 'transparent'}}
           _active={{background: 'blackAlpha.100'}}
           size='sm'
-          icon={<EditIcon />}
+          icon={<Search2Icon />}
           aria-label='edit location'
           {...getEditButtonProps()}
         />
@@ -44,13 +44,13 @@ export default function SearchBar() {
       justifyContent='center'
       gap={2}
       borderRadius={8}
-      bgColor='whiteAlpha.400'
       textAlign='center'
       defaultValue='Kota Medan, ID'
       fontSize='md'
+      fontWeight='medium'
       isPreviewFocusable={false}
     >
-      <EditablePreview fontWeight='medium' h={8} />
+      <EditablePreview h={8} />
       <Input as={EditableInput} size='sm' />
       <EditableControls />
     </Editable>
