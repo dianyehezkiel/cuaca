@@ -74,26 +74,34 @@ export default function AirQualityIndex({ data }: { data: AirQualityIndexType })
           <Text fontSize='6xl' fontWeight='medium' lineHeight='110%'>{data.aqiData.main.aqi}</Text>
           <Text fontSize='xs' fontWeight='medium'>{aqiDescription()}</Text>
         </Box>
-        <Box flex='0 0 60%' display='flex' alignItems='center' justifyContent='space-between' height={20} gap={1}>
-          <Box flex='1' display='flex' flexDir='column' height='100%'>
-            <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>NO<sub>2</sub></Text></Box>
-            <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>PM<sub>10</sub></Text></Box>
-            <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>O<sub>3</sub></Text></Box>
-            <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>PM<sub>2.5</sub></Text></Box>
+        <Box flex='0 0 60%' display='flex' flexDir='column'>
+          <Box display='flex' justifyContent='space-between'>
+            <Text flex='1' fontSize='xs' fontWeight='semibold' textAlign='left'>Gas</Text>
+            <Text flex='4' fontSize='xs' fontWeight='semibold' textAlign='center'>Indikator</Text>
+            <Text flex='1' fontSize='xs' fontWeight='semibold' textAlign='right'>&micro;g/m<sup>3</sup></Text>
           </Box>
-          <Box flex='4' display='flex' flexDir='column' height='100%'>
-            <Box h={5} py='1.5'><Progress value={no2Percentage} colorScheme={colorIndicator(no2Percentage)} size='sm'/></Box>
-            <Box h={5} py='1.5'><Progress value={pm10Percentage} colorScheme={colorIndicator(pm10Percentage)} size='sm'/></Box>
-            <Box h={5} py='1.5'><Progress value={o3Percentage} colorScheme={colorIndicator(o3Percentage)} size='sm'/></Box>
-            <Box h={5} py='1.5'><Progress value={pm2_5Percentage} colorScheme={colorIndicator(pm2_5Percentage)} size='sm'/></Box>
-          </Box>
-          <Box flex='1' display='flex' flexDir='column' height='100%'>
-            <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.no2}</Text></Box>
-            <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.pm10}</Text></Box>
-            <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.o3}</Text></Box>
-            <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.pm2_5}</Text></Box>
+          <Box display='flex' alignItems='center' justifyContent='space-between' height={20} gap={1}>
+            <Box flex='1' display='flex' flexDir='column' height='100%'>
+              <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>NO<sub>2</sub></Text></Box>
+              <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>PM<sub>10</sub></Text></Box>
+              <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>O<sub>3</sub></Text></Box>
+              <Box h={5} display='flex' alignItems='center'><Text fontSize='xs'>PM<sub>2.5</sub></Text></Box>
+            </Box>
+            <Box flex='4' display='flex' flexDir='column' height='100%'>
+              <Box h={5} py='1.5'><Progress value={no2Percentage} colorScheme={colorIndicator(no2Percentage)} size='sm'/></Box>
+              <Box h={5} py='1.5'><Progress value={pm10Percentage} colorScheme={colorIndicator(pm10Percentage)} size='sm'/></Box>
+              <Box h={5} py='1.5'><Progress value={o3Percentage} colorScheme={colorIndicator(o3Percentage)} size='sm'/></Box>
+              <Box h={5} py='1.5'><Progress value={pm2_5Percentage} colorScheme={colorIndicator(pm2_5Percentage)} size='sm'/></Box>
+            </Box>
+            <Box flex='1' display='flex' flexDir='column' height='100%'>
+              <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.no2}</Text></Box>
+              <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.pm10}</Text></Box>
+              <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.o3}</Text></Box>
+              <Box h={5} display='flex' alignItems='center' justifyContent='end'><Text fontSize='xs'>{data.aqiData.components.pm2_5}</Text></Box>
+            </Box>
           </Box>
         </Box>
+        
       </Box>
     </Box>
   )
