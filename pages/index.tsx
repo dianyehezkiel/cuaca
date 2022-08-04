@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Container } from '@chakra-ui/react'
 import type {GetServerSideProps} from 'next'
 import Head from 'next/head'
 import CurrentWeather from "../components/CurrentWeather";
@@ -62,16 +62,21 @@ export default function Home ({ currentWeather, weatherForecast, airQualityIndex
         pt={16}
         pb={24}
         px={4}
-        display='flex'
-        flexDir='column'
-        alignItems='center'
-        gap={2}
         bg='blue.300'
       >
-        <SearchBar />
-        <CurrentWeather data={currentWeather} />
-        <WeatherForecasts data={weatherForecast}/>
-        <AirQualityIndex data={airQualityIndex}/>
+        <Container
+          p={0}
+          maxW='container.md'
+          display='flex'
+          flexDir='column'
+          alignItems='center'
+          gap={2}
+        >
+          <SearchBar />
+          <CurrentWeather data={currentWeather} />
+          <WeatherForecasts data={weatherForecast}/>
+          <AirQualityIndex data={airQualityIndex}/>
+        </Container>
       </Box>
     </div>
   )
