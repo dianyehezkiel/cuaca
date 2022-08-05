@@ -1,7 +1,7 @@
-import WeatherForecast from "./WeatherForecast";
-import {Box, HStack, Text} from "@chakra-ui/react";
-import {ForecastData, WeatherForecastType, DailyForecast} from "../types/WeatherForecast";
-import React from "react";
+import WeatherForecast from "./WeatherForecast"
+import {Box, HStack, Text} from "@chakra-ui/react"
+import {ForecastData, WeatherForecastType, DailyForecast} from "../types"
+import React from "react"
 
 export default function WeatherForecasts({ data }: { data?: WeatherForecastType }) {
   const [forecastData, setForecastData] = React.useState<DailyForecast[]>([])
@@ -24,7 +24,7 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
         if (i === 0 && index === 1) {
           sortedData.push({
             day: today.getDay(),
-            forecast: []
+            forecast: [],
           })
         }
 
@@ -40,10 +40,10 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
 
       return sortedData
     }
-    
+
     setForecastData(sortForecastData())
   }, [data])
-  
+
   if (!data) return null
 
   const setForecastItem = (forecast: ForecastData, index: number) => {
@@ -68,7 +68,7 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
       <>
         {sortedData.map((df, i) => {
           if (df.forecast.length === 0) {
-            return null;
+            return null
           }
 
           const formattedDays = () => {
@@ -82,7 +82,7 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
           }
 
           return (
-            <Box 
+            <Box
               key={df.day}
               borderLeft={i > 0 ? '1px' : 'none'}
               borderColor='blackAlpha.500'
@@ -97,7 +97,7 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
       </>
     )
   }
-  
+
   return(
     <Box
       w='100%'

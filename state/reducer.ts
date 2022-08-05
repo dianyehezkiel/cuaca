@@ -1,11 +1,11 @@
-import { Coordinate } from "../types/UniversalTypes";
-import { State } from "./state";
-import { v4 as uuidV4 } from 'uuid';
-import { CurrentWeatherType } from "../types/CurrentWeather";
-import { WeatherForecastType } from "../types/WeatherForecast";
-import { AirQualityIndexType } from "../types/AirQualityIndex";
+import { Coordinate } from "../types/UniversalTypes"
+import { State } from "./state"
+import { v4 as uuidV4 } from 'uuid'
+import { CurrentWeatherType } from "../types/CurrentWeather"
+import { WeatherForecastType } from "../types/WeatherForecast"
+import { AirQualityIndexType } from "../types/AirQualityIndex"
 
-export type Action = 
+export type Action =
   {
     type: "SET_COORDINATE";
     payload: Coordinate;
@@ -36,7 +36,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         coordinate: {
-          [id]: { ...action.payload }
+          [id]: { ...action.payload },
         },
       }
     case "SET_CURRENT_WEATHER":

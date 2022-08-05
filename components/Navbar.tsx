@@ -1,6 +1,6 @@
-import {Box, Container, IconButton, Link, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
-import NextLink from "next/link";
-import {HamburgerIcon} from "@chakra-ui/icons";
+import {Box, Container, IconButton, Link, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react"
+import NextLink from "next/link"
+import {HamburgerIcon} from "@chakra-ui/icons"
 
 export default function Navbar() {
   return (

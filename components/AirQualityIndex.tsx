@@ -1,5 +1,5 @@
-import { Box, Progress, Text } from "@chakra-ui/react";
-import { AirQualityIndexType } from "../types/AirQualityIndex";
+import { Box, Progress, Text } from "@chakra-ui/react"
+import { AirQualityIndexType } from "../types"
 
 export default function AirQualityIndex({ data }: { data?: AirQualityIndexType }) {
   if (!data) return null
@@ -28,7 +28,7 @@ export default function AirQualityIndex({ data }: { data?: AirQualityIndexType }
   const pm10Percentage = data.aqiData.components.pm10 > 180
     ? 100
     : data.aqiData.components.pm10 / 180 * 100
-  
+
   const o3Percentage = data.aqiData.components.o3 > 240
     ? 100
     : data.aqiData.components.o3 / 240 * 100
@@ -36,7 +36,7 @@ export default function AirQualityIndex({ data }: { data?: AirQualityIndexType }
   const pm2_5Percentage = data.aqiData.components.pm2_5 > 110
     ? 100
     : data.aqiData.components.pm2_5 / 110 * 100
-  
+
   const colorIndicator = (percentage: number) => {
     switch (true) {
       case percentage < 25:
@@ -51,7 +51,7 @@ export default function AirQualityIndex({ data }: { data?: AirQualityIndexType }
         return 'purple'
     }
   }
-  
+
   return(
     <Box
       display='flex'
@@ -103,7 +103,7 @@ export default function AirQualityIndex({ data }: { data?: AirQualityIndexType }
             </Box>
           </Box>
         </Box>
-        
+
       </Box>
     </Box>
   )

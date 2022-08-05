@@ -5,12 +5,12 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Heading, Image,
-  Text
-} from "@chakra-ui/react";
-import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
-import {CurrentWeatherType} from "../types/CurrentWeather";
-import WeatherIcon from "./WeatherIcon";
+  Heading,
+  Text,
+} from "@chakra-ui/react"
+import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons"
+import {CurrentWeatherType} from "../types"
+import WeatherIcon from "./WeatherIcon"
 
 export default function CurrentWeather({ data }: { data?: CurrentWeatherType }) {
   if (!data) return null

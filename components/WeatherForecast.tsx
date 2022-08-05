@@ -1,18 +1,18 @@
-import {Box, Image, Text} from "@chakra-ui/react";
-import WeatherIcon from "./WeatherIcon";
+import {Box, Text} from "@chakra-ui/react"
+import WeatherIcon from "./WeatherIcon"
 
 export default function WeatherForecast(
   {
     time,
     weatherId,
     iconCode,
-    temperature
+    temperature,
   }: {
     time: number;
     weatherId: number;
     iconCode: string;
     temperature: number;
-  }
+  },
 ) {
   const SECONDS_TO_MILLISECONDS = 1000
   const hour = new Date(time * SECONDS_TO_MILLISECONDS).getHours()

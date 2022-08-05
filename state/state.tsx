@@ -1,9 +1,9 @@
-import React, { createContext } from "react";
-import { AirQualityIndexType } from "../types/AirQualityIndex";
-import { CurrentWeatherType } from "../types/CurrentWeather";
-import { Coordinate } from "../types/UniversalTypes";
-import { WeatherForecastType } from "../types/WeatherForecast";
-import { Action } from "./reducer";
+import React, { createContext } from "react"
+import { AirQualityIndexType } from "../types/AirQualityIndex"
+import { CurrentWeatherType } from "../types/CurrentWeather"
+import { Coordinate } from "../types/UniversalTypes"
+import { WeatherForecastType } from "../types/WeatherForecast"
+import { Action } from "./reducer"
 
 export type State = {
   coordinate: { [id: string]: Coordinate };
@@ -16,12 +16,12 @@ const initialState: State = {
   coordinate: { "default": { lat: 3.5896654, lon: 98.6738261 } },
   currentWeather: {},
   weatherForecast: {},
-  airQualityIndex: {}
+  airQualityIndex: {},
 }
 
 export const StateContext = createContext<[State, React.Dispatch<Action>]>([
   initialState,
-  () => initialState
+  () => initialState,
 ])
 
 type StateProviderProps = {
@@ -31,9 +31,9 @@ type StateProviderProps = {
 
 export const StateProvider = ({
   reducer,
-  children
+  children,
 }: StateProviderProps) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState)
 
   return (
     <StateContext.Provider value={[state, dispatch]}>

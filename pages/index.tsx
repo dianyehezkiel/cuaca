@@ -1,24 +1,17 @@
 import { Box, Container } from '@chakra-ui/react'
-import type {GetServerSideProps} from 'next'
 import Head from 'next/head'
-import CurrentWeather from "../components/CurrentWeather";
-import {CurrentWeatherFromApi, CurrentWeatherType} from "../types/CurrentWeather";
-import axios from "axios";
-import {toAirQualityIndex, toCurrentWeather, toWeatherForecast} from "../utils";
-import parseJson from "parse-json";
-import WeatherForecasts from "../components/WeatherForecasts";
-import {WeatherForecastType, WeatherForecastFromApi} from "../types/WeatherForecast";
-import AirQualityIndex from '../components/AirQualityIndex';
-import { AirQualityIndexType, AirQualityIndexFromApi } from '../types/AirQualityIndex';
-import SearchBar from '../components/SearchBar';
-import { setAirQualityIndex, setCurrentWeather, setWeatherForecast, useStateValue } from '../state';
-import React from 'react';
-import getWeatherData from './api/getWeatherData';
+import CurrentWeather from "../components/CurrentWeather"
+import axios from "axios"
+import WeatherForecasts from "../components/WeatherForecasts"
+import AirQualityIndex from '../components/AirQualityIndex'
+import SearchBar from '../components/SearchBar'
+import { setAirQualityIndex, setCurrentWeather, setWeatherForecast, useStateValue } from '../state'
+import React from 'react'
 
 export default function Home () {
   const [
-    { coordinate, currentWeather, weatherForecast, airQualityIndex }, 
-    dispatch
+    { coordinate, currentWeather, weatherForecast, airQualityIndex },
+    dispatch,
   ] = useStateValue()
 
   React.useEffect(() => {
@@ -34,15 +27,15 @@ export default function Home () {
 
       dispatch(setCurrentWeather(
         "default",
-        data.currentWeather
+        data.currentWeather,
       ))
       dispatch(setWeatherForecast(
         "default",
-        data.weatherForecast
+        data.weatherForecast,
       ))
       dispatch(setAirQualityIndex(
         "default",
-        data.airQualityIndex
+        data.airQualityIndex,
       ))
     }
 
