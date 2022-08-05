@@ -12,7 +12,8 @@ import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons";
 import {CurrentWeatherType} from "../types/CurrentWeather";
 import WeatherIcon from "./WeatherIcon";
 
-export default function CurrentWeather({ data }: { data: CurrentWeatherType }) {
+export default function CurrentWeather({ data }: { data?: CurrentWeatherType }) {
+  if (!data) return null
   const now = Date.now()
   const today = new Date(now)
   const todayString = today.toLocaleDateString('id-ID', { weekday: "long", year: "2-digit", month: "short", day: "numeric" })

@@ -1,7 +1,9 @@
 import { Box, Progress, Text } from "@chakra-ui/react";
 import { AirQualityIndexType } from "../types/AirQualityIndex";
 
-export default function AirQualityIndex({ data }: { data: AirQualityIndexType }) {
+export default function AirQualityIndex({ data }: { data?: AirQualityIndexType }) {
+  if (!data) return null
+
   const aqiDescription = () => {
     switch (data.aqiData.main.aqi) {
       case 1:

@@ -3,12 +3,15 @@ import {Box, HStack, Text} from "@chakra-ui/react";
 import {ForecastData, WeatherForecastType, DailyForecast} from "../types/WeatherForecast";
 import React from "react";
 
-export default function WeatherForecasts({ data }: { data: WeatherForecastType }) {
+export default function WeatherForecasts({ data }: { data?: WeatherForecastType }) {
   const [forecastData, setForecastData] = React.useState<DailyForecast[]>([])
 
   const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu']
 
+  // TODO: clean this mess
   React.useEffect(() => {
+    if (!data) return
+
     const sortForecastData = () => {
       const today = new Date()
       const sortedData: DailyForecast[] = []
@@ -40,6 +43,8 @@ export default function WeatherForecasts({ data }: { data: WeatherForecastType }
     
     setForecastData(sortForecastData())
   }, [data])
+  
+  if (!data) return null
 
   const setForecastItem = (forecast: ForecastData, index: number) => {
     return (
