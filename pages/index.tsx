@@ -11,44 +11,44 @@ import {WeatherForecastType, WeatherForecastFromApi} from "../types/WeatherForec
 import AirQualityIndex from '../components/AirQualityIndex';
 import { AirQualityIndexType, AirQualityIndexFromApi } from '../types/AirQualityIndex';
 import SearchBar from '../components/SearchBar';
+import { setAirQualityIndex, setCurrentWeather, setWeatherForecast, useStateValue } from '../state';
+import React from 'react';
+import getWeatherData from './api/getWeatherData';
 
-const BASE_URL = 'https://api.openweathermap.org'
-interface HomeProps {
-  currentWeather: CurrentWeatherType;
-  weatherForecast: WeatherForecastType;
-  airQualityIndex: AirQualityIndexType;
-}
+export default function Home () {
+  const [
+    { coordinate, currentWeather, weatherForecast, airQualityIndex }, 
+    dispatch
+  ] = useStateValue()
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const aqiParams = {
-    lat: 3.5896654,
-    lon: 98.6738261,
-    appid: process.env.API_KEY,
-  }
-  const weatherParams = {
-    ...aqiParams,
-    units: 'metric',
-    lang: 'id',
-  }
-
-  const weatherFromApi = await axios.get<CurrentWeatherFromApi>(`${BASE_URL}/data/2.5/weather`, { params: weatherParams })
-  const forecastFromApi = await axios.get<WeatherForecastFromApi>(`${BASE_URL}/data/2.5/forecast`, { params: weatherParams })
-  const aqiFromApi = await axios.get<AirQualityIndexFromApi>(`${BASE_URL}/data/2.5/air_pollution`, { params: aqiParams })
-
-  const currentWeather = toCurrentWeather(weatherFromApi.data)
-  const weatherForecast = toWeatherForecast(forecastFromApi.data)
-  const airQualityIndex = toAirQualityIndex(aqiFromApi.data)
-
-  return {
-    props: {
-      currentWeather: parseJson(JSON.stringify(currentWeather)),
-      weatherForecast: parseJson(JSON.stringify(weatherForecast)),
-      airQualityIndex: parseJson(JSON.stringify(airQualityIndex)),
+  React.useEffect(() => {
+    const params = {
+      lat: coordinate['default'].lat,
+      lon: coordinate['default'].lon,
     }
-  }
-}
 
-export default function Home ({ currentWeather, weatherForecast, airQualityIndex }: HomeProps) {
+    const fetchData = async () => {
+      const { data } = await axios.get('/api/getWeatherData', { params })
+
+      console.log(data)
+
+      dispatch(setCurrentWeather(
+        "default",
+        data.currentWeather
+      ))
+      dispatch(setWeatherForecast(
+        "default",
+        data.weatherForecast
+      ))
+      dispatch(setAirQualityIndex(
+        "default",
+        data.airQualityIndex
+      ))
+    }
+
+    fetchData()
+  }, [coordinate, dispatch])
+
   return (
     <div>
       <Head>
@@ -73,9 +73,9 @@ export default function Home ({ currentWeather, weatherForecast, airQualityIndex
           gap={2}
         >
           <SearchBar />
-          <CurrentWeather data={currentWeather} />
-          <WeatherForecasts data={weatherForecast}/>
-          <AirQualityIndex data={airQualityIndex}/>
+          <CurrentWeather data={currentWeather["default"]} />
+          <WeatherForecasts data={weatherForecast["default"]}/>
+          <AirQualityIndex data={airQualityIndex["default"]}/>
         </Container>
       </Box>
     </div>
