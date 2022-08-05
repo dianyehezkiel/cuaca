@@ -1,9 +1,54 @@
-import { Box, Heading, Highlight, Text, Link } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import { Box, Container } from '@chakra-ui/react'
+import type {GetServerSideProps} from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import CurrentWeather from "../components/CurrentWeather";
+import {CurrentWeatherFromApi, CurrentWeatherType} from "../types/CurrentWeather";
+import axios from "axios";
+import {toAirQualityIndex, toCurrentWeather, toWeatherForecast} from "../utils";
+import parseJson from "parse-json";
+import WeatherForecasts from "../components/WeatherForecasts";
+import {WeatherForecastType, WeatherForecastFromApi} from "../types/WeatherForecast";
+import AirQualityIndex from '../components/AirQualityIndex';
+import { AirQualityIndexType, AirQualityIndexFromApi } from '../types/AirQualityIndex';
+import SearchBar from '../components/SearchBar';
 
-const Home: NextPage = () => {
+const BASE_URL = 'https://api.openweathermap.org'
+interface HomeProps {
+  currentWeather: CurrentWeatherType;
+  weatherForecast: WeatherForecastType;
+  airQualityIndex: AirQualityIndexType;
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const aqiParams = {
+    lat: 3.5896654,
+    lon: 98.6738261,
+    appid: process.env.API_KEY,
+  }
+  const weatherParams = {
+    ...aqiParams,
+    units: 'metric',
+    lang: 'id',
+  }
+
+  const weatherFromApi = await axios.get<CurrentWeatherFromApi>(`${BASE_URL}/data/2.5/weather`, { params: weatherParams })
+  const forecastFromApi = await axios.get<WeatherForecastFromApi>(`${BASE_URL}/data/2.5/forecast`, { params: weatherParams })
+  const aqiFromApi = await axios.get<AirQualityIndexFromApi>(`${BASE_URL}/data/2.5/air_pollution`, { params: aqiParams })
+
+  const currentWeather = toCurrentWeather(weatherFromApi.data)
+  const weatherForecast = toWeatherForecast(forecastFromApi.data)
+  const airQualityIndex = toAirQualityIndex(aqiFromApi.data)
+
+  return {
+    props: {
+      currentWeather: parseJson(JSON.stringify(currentWeather)),
+      weatherForecast: parseJson(JSON.stringify(weatherForecast)),
+      airQualityIndex: parseJson(JSON.stringify(airQualityIndex)),
+    }
+  }
+}
+
+export default function Home ({ currentWeather, weatherForecast, airQualityIndex }: HomeProps) {
   return (
     <div>
       <Head>
@@ -12,65 +57,27 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box as='main' 
-        minH='100vh' 
-        py='4rem' 
-        display='flex'
-        flexDir='column'
-        justifyContent='center'
-        alignItems='center'
+      <Box as='main'
+        minH='100vh'
+        pt={16}
+        pb={24}
+        px={4}
+        bg='blue.300'
       >
-        <Heading as='h1'
-          lineHeight='1.15'
-          fontSize='4rem'
-          textAlign='center'
+        <Container
+          p={0}
+          maxW='container.md'
+          display='flex'
+          flexDir='column'
+          alignItems='center'
+          gap={2}
         >
-          Welcome to {' '}
-          <Box as='span' color='#4e6eb9'>
-            Cuaca
-          </Box>
-        </Heading>
-
-        <Text
-          my='4rem'
-          lineHeight='1.5'
-          fontSize='1.5rem'
-        >
-          Site currently on construction
-        </Text>
-      </Box>
-
-      <Box as='footer'
-        display='flex'
-        flex={1}
-        py='2rem'
-        borderTop='1px'
-        borderTopColor='#eaeaea'
-        justifyContent='center'
-        alignItems='center'
-      >
-        <Text>
-          Created by
-          <Link
-            href="https://dianyehezkiel.me"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Box
-              as='span'
-              display='inline'
-              h='1rem'
-              ml='0.5rem'
-              mr='0.25rem'
-            >
-              <Image src="/dy-logo.svg" alt="DY Logo" width={32} height={16} />
-            </Box>
-            Dian Yehezkiel
-          </Link>
-        </Text>
+          <SearchBar />
+          <CurrentWeather data={currentWeather} />
+          <WeatherForecasts data={weatherForecast}/>
+          <AirQualityIndex data={airQualityIndex}/>
+        </Container>
       </Box>
     </div>
   )
 }
-
-export default Home
