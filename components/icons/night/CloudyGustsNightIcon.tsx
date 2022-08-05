@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const CloudyGustsNightIcon = createIcon({
   displayName: 'CloudyGustsNightIcon',
@@ -25,7 +25,7 @@ const CloudyGustsNightIcon = createIcon({
 	c-0.86,0.2-1.61,0.61-2.27,1.23c-0.66,0.62-1.11,1.35-1.36,2.2v0.03C5.51,15.58,5.5,15.61,5.5,15.65z M18.73,8.76
 	c0.31-0.55,0.74-0.97,1.29-1.26c0.55-0.29,1.12-0.44,1.71-0.44c0.14,0,0.24,0,0.31,0.01c-0.01,0.09-0.02,0.21-0.02,0.36
 	c0,0.94,0.26,1.85,0.79,2.71c0.52,0.86,1.25,1.51,2.17,1.94c-0.16,0.38-0.41,0.72-0.75,1.03c-0.89-0.76-1.94-1.14-3.16-1.14h-0.33
-	C20.48,10.71,19.81,9.64,18.73,8.76z`
+	C20.48,10.71,19.81,9.64,18.73,8.76z`,
 })
 
 export default CloudyGustsNightIcon

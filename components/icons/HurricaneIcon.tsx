@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const HurricaneIcon = createIcon({
   displayName: 'HurricaneIcon',
@@ -14,7 +14,7 @@ const HurricaneIcon = createIcon({
 	c-0.6-0.34-1.07-0.81-1.43-1.41C11.27,15.87,11.09,15.23,11.08,14.53z M12.78,14.48c0,0.61,0.22,1.13,0.65,1.57
 	c0.43,0.43,0.95,0.65,1.56,0.65c0.57,0,1.06-0.19,1.49-0.57c0.42-0.38,0.66-0.85,0.73-1.41l0.01-0.23c0-0.02,0-0.04,0.01-0.05
 	c-0.01-0.6-0.23-1.11-0.66-1.52c-0.43-0.42-0.96-0.62-1.57-0.62c-0.56,0-1.04,0.18-1.46,0.54s-0.66,0.82-0.73,1.36l-0.02,0.25V14.48
-	z`
+	z`,
 })
 
 export default HurricaneIcon

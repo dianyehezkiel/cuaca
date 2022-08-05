@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const RainMixNightIcon = createIcon({
   displayName: 'RainMixNightIcon',
@@ -39,7 +39,7 @@ const RainMixNightIcon = createIcon({
 	c-0.23-0.07-0.44-0.05-0.64,0.06s-0.32,0.27-0.39,0.51l-0.28,0.91c0,0.02-0.01,0.06-0.02,0.12C17.53,18.74,17.52,18.78,17.52,18.81z
 	M17.59,8.76c0.32-0.58,0.76-1.02,1.31-1.34c0.56-0.32,1.13-0.47,1.73-0.46c0.09,0,0.19,0.01,0.3,0.03V7.3
 	c-0.01,0.98,0.25,1.9,0.77,2.76c0.53,0.86,1.27,1.5,2.22,1.94c-0.19,0.41-0.46,0.78-0.8,1.11c-0.92-0.76-2-1.14-3.23-1.14h-0.31
-	C19.27,10.66,18.61,9.59,17.59,8.76z`
+	C19.27,10.66,18.61,9.59,17.59,8.76z`,
 })
 
 export default RainMixNightIcon
