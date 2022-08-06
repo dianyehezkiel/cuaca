@@ -16,9 +16,7 @@ export default async function currentWeather(req: WeatherApiRequest, res: NextAp
 
     const { data: weatherFromApi } = await axios.get<CurrentWeatherFromApi>(`${BASE_URL}/weather`, { params })
 
-    res.json({
-      currentWeather: toCurrentWeather(weatherFromApi),
-    })
+    res.json(toCurrentWeather(weatherFromApi))
   } catch (err) {
     res.status(500).json({ err })
   }

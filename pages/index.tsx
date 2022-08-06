@@ -5,12 +5,12 @@ import axios from "axios"
 import WeatherForecasts from "../components/WeatherForecasts"
 import AirQualityIndex from '../components/AirQualityIndex'
 import SearchBar from '../components/SearchBar'
-import { setAirQualityIndex, setCurrentWeather, setWeatherForecast, useStateValue } from '../state'
+import { setAirQualityIndex, setWeatherForecast, useStateValue } from '../state'
 import React from 'react'
 
 export default function Home () {
   const [
-    { coordinate, currentWeather, weatherForecast, airQualityIndex },
+    { coordinate, weatherForecast, airQualityIndex },
     dispatch,
   ] = useStateValue()
 
@@ -23,12 +23,6 @@ export default function Home () {
     const fetchData = async () => {
       const { data } = await axios.get('/api/getWeatherData', { params })
 
-      console.log(data)
-
-      dispatch(setCurrentWeather(
-        "default",
-        data.currentWeather,
-      ))
       dispatch(setWeatherForecast(
         "default",
         data.weatherForecast,
@@ -66,7 +60,7 @@ export default function Home () {
           gap={2}
         >
           <SearchBar />
-          <CurrentWeather data={currentWeather["default"]} />
+          <CurrentWeather id='default' lat={coordinate['default'].lat} lon={coordinate['default'].lon} />
           <WeatherForecasts data={weatherForecast["default"]}/>
           <AirQualityIndex data={airQualityIndex["default"]}/>
         </Container>
