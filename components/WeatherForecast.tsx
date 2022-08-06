@@ -32,10 +32,15 @@ export default function WeatherForecast(
       alignItems='center'
       borderColor='blackAlpha.500'
       minW={16}
+      minH={24}
     >
-      <Text fontSize='xs'>{formattedHour}</Text>
-      <WeatherIcon boxSize={12} weatherId={weatherId} day={day()} />
-      <Text fontSize='sm' fontWeight='medium'>{temperature.toFixed(1)}&deg;C</Text>
+      <Text fontSize='xs'>
+        {formattedHour}
+      </Text>
+      <WeatherIcon boxSize={12} weatherId={weatherId} day={day()} my='auto'/>
+      <Text fontSize='sm' fontWeight='medium'>
+        {temperature.toFixed(1)}&deg;C
+      </Text>
     </Box>
   )
 }

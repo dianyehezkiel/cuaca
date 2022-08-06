@@ -1,5 +1,5 @@
 import WeatherForecast from "./WeatherForecast"
-import { Box, HStack, Text } from "@chakra-ui/react"
+import { Box, HStack, Skeleton, Text } from "@chakra-ui/react"
 import {
   ForecastData,
   DailyForecast,
@@ -38,7 +38,6 @@ export default function WeatherForecasts(
         } = await axios.get<WeatherForecastType>('/api/forecast', { params })
 
         dispatch(setWeatherForecast(id, weatherForecast))
-        console.log(weatherForecast)
         setForecastData(groupForecastData(weatherForecast))
         setLoading(false)
       } catch (err) {
@@ -54,7 +53,49 @@ export default function WeatherForecasts(
 
   if (loading) {
     return (
-      <h1>Loading...</h1>
+      <Box
+        display='flex'
+        flexDir='column'
+        w='100%'
+        overflow='hidden'
+        borderRadius={8}
+        bgColor='whiteAlpha.400'
+        shadow='lg'
+        alignItems='center'
+      >
+        <Skeleton
+          h={6}
+          w={24}
+          my={1}
+          startColor="blue.100"
+          endColor="blue.300"
+        />
+        <Box w='100%' display='flex' gap={1} pb={2.5} alignItems='end'>
+          <Box>
+            <Skeleton
+              h={5}
+              w={12}
+              mb={1}
+              startColor="blue.100"
+              endColor="blue.300"
+            />
+            <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          </Box>
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Box>
+            <Skeleton
+              h={5}
+              w={12}
+              mb={1}
+              startColor="blue.100"
+              endColor="blue.300"
+            />
+            <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          </Box>
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+        </Box>
+      </Box>
     )
   }
 
@@ -104,6 +145,7 @@ export default function WeatherForecasts(
                 ml={1}
                 mb={1}
                 fontSize='sm'
+                lineHeight={5}
                 fontWeight='medium'
               >
                 {formattedDays()}
