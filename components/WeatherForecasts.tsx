@@ -13,13 +13,15 @@ import { groupForecastData } from "../utils"
 import { days } from "../utils/constant"
 
 interface WeatherForecastProps extends Coordinate {
-  id: string
+  id: string;
 }
 
-export default function WeatherForecasts(
-  { id, lat, lon }: WeatherForecastProps,
-) {
-  const [ , dispatch] = useStateValue()
+export default function WeatherForecasts({
+  id,
+  lat,
+  lon,
+}: WeatherForecastProps) {
+  const [, dispatch] = useStateValue()
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const [forecastData, setForecastData] = React.useState<DailyForecast[]>([])
@@ -33,9 +35,10 @@ export default function WeatherForecasts(
           lat,
           lon,
         }
-        const {
-          data: weatherForecast,
-        } = await axios.get<WeatherForecastType>('/api/forecast', { params })
+        const { data: weatherForecast } = await axios.get<WeatherForecastType>(
+          "/api/forecast",
+          { params },
+        )
 
         dispatch(setWeatherForecast(id, weatherForecast))
         setForecastData(groupForecastData(weatherForecast))
@@ -54,14 +57,14 @@ export default function WeatherForecasts(
   if (loading) {
     return (
       <Box
-        display='flex'
-        flexDir='column'
-        w='100%'
-        overflow='hidden'
+        display="flex"
+        flexDir="column"
+        w="100%"
+        overflow="hidden"
         borderRadius={8}
-        bgColor='whiteAlpha.400'
-        shadow='lg'
-        alignItems='center'
+        bgColor="whiteAlpha.400"
+        shadow="lg"
+        alignItems="center"
       >
         <Skeleton
           h={6}
@@ -70,7 +73,14 @@ export default function WeatherForecasts(
           startColor="blue.100"
           endColor="blue.300"
         />
-        <Box w='100%' display='flex' gap={1} pb={2.5} alignItems='end'>
+        <Box
+          display="flex"
+          gap={1}
+          pb={2.5}
+          ml={1}
+          alignItems="end"
+          alignSelf="start"
+        >
           <Box>
             <Skeleton
               h={5}
@@ -83,6 +93,7 @@ export default function WeatherForecasts(
           </Box>
           <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
           <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
           <Box>
             <Skeleton
               h={5}
@@ -93,6 +104,12 @@ export default function WeatherForecasts(
             />
             <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
           </Box>
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
+          <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
           <Skeleton h={24} w={16} startColor="blue.100" endColor="blue.300" />
         </Box>
       </Box>
@@ -103,8 +120,8 @@ export default function WeatherForecasts(
     return (
       <Box
         key={forecast.dt}
-        borderLeft={index > 0 ? '1px' : 'none'}
-        borderColor='blackAlpha.300'
+        borderLeft={index > 0 ? "1px" : "none"}
+        borderColor="blackAlpha.300"
       >
         <WeatherForecast
           time={forecast.dt}
@@ -137,20 +154,20 @@ export default function WeatherForecasts(
           return (
             <Box
               key={df.day}
-              borderLeft={i > 0 ? '1px' : 'none'}
-              borderColor='blackAlpha.500'
+              borderLeft={i > 0 ? "1px" : "none"}
+              borderColor="blackAlpha.500"
             >
               <Text
                 left={0}
                 ml={1}
                 mb={1}
-                fontSize='sm'
+                fontSize="sm"
                 lineHeight={5}
-                fontWeight='medium'
+                fontWeight="medium"
               >
                 {formattedDays()}
               </Text>
-              <Box display='flex'>
+              <Box display="flex">
                 {df.forecast.map((f, i) => setForecastItem(f, i))}
               </Box>
             </Box>
@@ -160,26 +177,18 @@ export default function WeatherForecasts(
     )
   }
 
-  return(
+  return (
     <Box
-      w='100%'
-      overflow='hidden'
+      w="100%"
+      overflow="hidden"
       borderRadius={8}
-      bgColor='whiteAlpha.400'
-      shadow='lg'
+      bgColor="whiteAlpha.400"
+      shadow="lg"
     >
-      <Text
-        fontSize='md'
-        fontWeight='medium'
-        align='center'
-        my={1}
-      >
+      <Text fontSize="md" fontWeight="medium" align="center" my={1}>
         Prediksi Cuaca
       </Text>
-      <HStack
-        overflowX='auto'
-        spacing={0}
-      >
+      <HStack overflowX="auto" spacing={0}>
         {/*TODO: Make name of the day stick when scrolled*/}
         {setForecastDaily(forecastData)}
       </HStack>
