@@ -1,50 +1,62 @@
 import WeatherForecast from "./WeatherForecast"
-import {Box, HStack, Text} from "@chakra-ui/react"
-import {ForecastData, WeatherForecastType, DailyForecast} from "../types"
+import { Box, HStack, Text } from "@chakra-ui/react"
+import {
+  ForecastData,
+  DailyForecast,
+  Coordinate,
+  WeatherForecastType,
+} from "../types"
 import React from "react"
+import { setWeatherForecast, useStateValue } from "../state"
+import axios from "axios"
+import { groupForecastData } from "../utils"
+import { days } from "../utils/constant"
 
-export default function WeatherForecasts({ data }: { data?: WeatherForecastType }) {
+interface WeatherForecastProps extends Coordinate {
+  id: string
+}
+
+export default function WeatherForecasts(
+  { id, lat, lon }: WeatherForecastProps,
+) {
+  const [ , dispatch] = useStateValue()
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState(false)
   const [forecastData, setForecastData] = React.useState<DailyForecast[]>([])
 
-  const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu']
-
-  // TODO: clean this mess
   React.useEffect(() => {
-    if (!data) return
-
-    const sortForecastData = () => {
-      const today = new Date()
-      const sortedData: DailyForecast[] = []
-
-      data.list.map((f, i) => {
-        const dataDate = new Date(f.dt * 1000)
-        const diff = dataDate.getDay() - today.getDay()
-        const index = diff >= 0 ? diff : diff + 7
-
-        if (i === 0 && index === 1) {
-          sortedData.push({
-            day: today.getDay(),
-            forecast: [],
-          })
+    const fetchForecast = async () => {
+      try {
+        setLoading(true)
+        setError(false)
+        const params = {
+          lat,
+          lon,
         }
+        const {
+          data: weatherForecast,
+        } = await axios.get<WeatherForecastType>('/api/forecast', { params })
 
-        if (!sortedData[index]) {
-          sortedData.push({
-            day: dataDate.getDay(),
-            forecast: [],
-          })
-        }
-
-        sortedData[index].forecast.push(f)
-      })
-
-      return sortedData
+        dispatch(setWeatherForecast(id, weatherForecast))
+        console.log(weatherForecast)
+        setForecastData(groupForecastData(weatherForecast))
+        setLoading(false)
+      } catch (err) {
+        setError(true)
+        console.log(err)
+      }
     }
 
-    setForecastData(sortForecastData())
-  }, [data])
+    fetchForecast()
+  }, [id, lat, lon, dispatch])
 
-  if (!data) return null
+  if (error) return <h1>Something bad happened</h1>
+
+  if (loading) {
+    return (
+      <h1>Loading...</h1>
+    )
+  }
 
   const setForecastItem = (forecast: ForecastData, index: number) => {
     return (
@@ -73,10 +85,10 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
 
           const formattedDays = () => {
             if (i === 0) {
-              return 'Hari ini'
+              return days[7]
             }
             if (i === 1) {
-              return 'Besok'
+              return days[8]
             }
             return days[df.day]
           }
@@ -87,7 +99,15 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
               borderLeft={i > 0 ? '1px' : 'none'}
               borderColor='blackAlpha.500'
             >
-              <Text left={0} ml={1} mb={1} fontSize='sm' fontWeight='medium'>{formattedDays()}</Text>
+              <Text
+                left={0}
+                ml={1}
+                mb={1}
+                fontSize='sm'
+                fontWeight='medium'
+              >
+                {formattedDays()}
+              </Text>
               <Box display='flex'>
                 {df.forecast.map((f, i) => setForecastItem(f, i))}
               </Box>
@@ -106,7 +126,14 @@ export default function WeatherForecasts({ data }: { data?: WeatherForecastType 
       bgColor='whiteAlpha.400'
       shadow='lg'
     >
-      <Text fontSize='md' fontWeight='medium' align='center' my={1}>Prediksi Cuaca</Text>
+      <Text
+        fontSize='md'
+        fontWeight='medium'
+        align='center'
+        my={1}
+      >
+        Prediksi Cuaca
+      </Text>
       <HStack
         overflowX='auto'
         spacing={0}
