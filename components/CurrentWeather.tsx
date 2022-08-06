@@ -47,6 +47,8 @@ export default function CurrentWeather({ id, lat, lon }: CurrentWeatherProps) {
     fetchWeather()
   }, [id, lat, lon, dispatch])
 
+  if (error) return <h1>Something bad happened</h1>
+
   if (loading) {
     return (
       <Box
@@ -133,7 +135,6 @@ export default function CurrentWeather({ id, lat, lon }: CurrentWeatherProps) {
     )
   }
 
-  if (error) return <h1>Something bad happened</h1>
   const now = Date.now()
   const today = new Date(now)
   const todayString = today.toLocaleDateString('id-ID', { weekday: "long", year: "2-digit", month: "short", day: "numeric" })
