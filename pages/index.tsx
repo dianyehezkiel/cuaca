@@ -5,12 +5,12 @@ import axios from "axios"
 import WeatherForecasts from "../components/WeatherForecasts"
 import AirQualityIndex from '../components/AirQualityIndex'
 import SearchBar from '../components/SearchBar'
-import { setAirQualityIndex, setWeatherForecast, useStateValue } from '../state'
+import { setAirQualityIndex, useStateValue } from '../state'
 import React from 'react'
 
 export default function Home () {
   const [
-    { coordinate, weatherForecast, airQualityIndex },
+    { coordinate, airQualityIndex },
     dispatch,
   ] = useStateValue()
 
@@ -23,10 +23,6 @@ export default function Home () {
     const fetchData = async () => {
       const { data } = await axios.get('/api/getWeatherData', { params })
 
-      dispatch(setWeatherForecast(
-        "default",
-        data.weatherForecast,
-      ))
       dispatch(setAirQualityIndex(
         "default",
         data.airQualityIndex,
@@ -40,7 +36,12 @@ export default function Home () {
     <div>
       <Head>
         <title>Cuaca</title>
-        <meta name="description" content="Cuaca weather app by Dian Yehezkiel. Powered by Open Weather API." />
+        <meta
+          name="description"
+          content={
+            "Cuaca weather app by Dian Yehezkiel. Powered by Open Weather API."
+          }
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -60,8 +61,16 @@ export default function Home () {
           gap={2}
         >
           <SearchBar />
-          <CurrentWeather id='default' lat={coordinate['default'].lat} lon={coordinate['default'].lon} />
-          <WeatherForecasts data={weatherForecast["default"]}/>
+          <CurrentWeather
+            id='default'
+            lat={coordinate['default'].lat}
+            lon={coordinate['default'].lon}
+          />
+          <WeatherForecasts
+            id='default'
+            lat={coordinate['default'].lat}
+            lon={coordinate['default'].lon}
+          />
           <AirQualityIndex data={airQualityIndex["default"]}/>
         </Container>
       </Box>
