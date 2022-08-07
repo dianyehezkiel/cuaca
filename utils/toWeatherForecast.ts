@@ -1,4 +1,4 @@
-import {WeatherForecastFromApi, WeatherForecastType} from "../types/WeatherForecast";
+import {WeatherForecastFromApi, WeatherForecastType} from "../types"
 
 const toWeatherForecast = (apiData: WeatherForecastFromApi): WeatherForecastType => {
   return {
@@ -6,4 +6,4 @@ const toWeatherForecast = (apiData: WeatherForecastFromApi): WeatherForecastType
   }
 }
 
-export default toWeatherForecast;
+export default toWeatherForecast

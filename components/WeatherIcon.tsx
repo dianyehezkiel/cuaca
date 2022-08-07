@@ -58,12 +58,12 @@ interface WeatherIconProps extends IconProps {
 
 export default function WeatherIcon(props: WeatherIconProps ) {
   const { weatherId, day, ...iconProps } = props
-  
+
   if (!weatherId) {
     // TODO: Change fallback icon
     return <Icon {...props} />
   }
-  
+
   if (typeof day !== 'boolean') {
     switch (weatherId) {
       case 200:

@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const LightningNightIcon = createIcon({
   displayName: 'LightningNightIcon',
@@ -18,7 +18,7 @@ const LightningNightIcon = createIcon({
 	c-0.02-0.05-0.06-0.07-0.13-0.07h-2.2l2.31-4.21c0.07-0.14,0.02-0.22-0.14-0.22h-2.94c-0.08,0-0.15,0.05-0.22,0.14L11.79,21.56z
 	M17.6,8.81c0.33-0.57,0.77-1,1.33-1.3c0.55-0.3,1.13-0.45,1.72-0.45c0.13,0,0.22,0.01,0.27,0.02v0.31c0,0.96,0.26,1.87,0.78,2.73
 	c0.52,0.86,1.24,1.51,2.17,1.96c-0.16,0.37-0.41,0.73-0.75,1.07c-0.92-0.79-1.99-1.18-3.22-1.18h-0.32
-	C19.29,10.71,18.63,9.66,17.6,8.81z`
+	C19.29,10.71,18.63,9.66,17.6,8.81z`,
 })
 
 export default LightningNightIcon

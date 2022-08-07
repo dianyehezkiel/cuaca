@@ -1,5 +1,5 @@
-import { CloseIcon, EditIcon, Search2Icon, SearchIcon } from "@chakra-ui/icons"
-import { Box, ButtonGroup, Editable, EditableInput, EditablePreview, Flex, IconButton, Input, useEditableControls } from "@chakra-ui/react"
+import { CloseIcon, Search2Icon } from "@chakra-ui/icons"
+import { Box, Editable, EditableInput, EditablePreview, IconButton, Input, useEditableControls } from "@chakra-ui/react"
 
 export default function SearchBar() {
   function EditableControls() {

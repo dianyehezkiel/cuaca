@@ -1,4 +1,4 @@
-import {CurrentWeatherType, CurrentWeatherFromApi} from "../types/CurrentWeather";
+import { CurrentWeatherType, CurrentWeatherFromApi } from "../types"
 
 const toCurrentWeather = (apiData: CurrentWeatherFromApi): CurrentWeatherType => {
   return {
@@ -15,4 +15,4 @@ const toCurrentWeather = (apiData: CurrentWeatherFromApi): CurrentWeatherType =>
   }
 }
 
-export default toCurrentWeather;
+export default toCurrentWeather

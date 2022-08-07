@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const ShowersNightIcon = createIcon({
   displayName: 'ShowersNightIcon',
@@ -31,7 +31,7 @@ const ShowersNightIcon = createIcon({
 	s-0.3-0.33-0.53-0.4c-0.22-0.07-0.43-0.05-0.63,0.07s-0.33,0.29-0.4,0.52l-0.26,1.06C17.56,18.83,17.55,18.92,17.55,18.98z
 	M17.58,8.81c0.32-0.56,0.76-1,1.33-1.31c0.57-0.31,1.17-0.47,1.81-0.47h0.21c-0.01,0.09-0.01,0.21-0.01,0.38
 	c0,0.95,0.26,1.85,0.78,2.71c0.52,0.86,1.25,1.51,2.17,1.96c-0.22,0.43-0.48,0.8-0.78,1.1c-0.93-0.81-2.02-1.21-3.25-1.21h-0.32
-	C19.27,10.78,18.63,9.73,17.58,8.81z`
+	C19.27,10.78,18.63,9.73,17.58,8.81z`,
 })
 
 export default ShowersNightIcon

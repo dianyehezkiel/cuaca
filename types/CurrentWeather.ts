@@ -6,7 +6,7 @@ import {
   CloudData,
   RainData,
   SnowData,
-} from "./UniversalTypes";
+} from "./UniversalTypes"
 
 interface SystemData {
   type: number;
