@@ -4,7 +4,10 @@ import { AirQualityIndexFromApi, WeatherApiRequest } from "../../types"
 import { toAirQualityIndex } from "../../utils"
 import { appid, BASE_URL } from "../../utils/constant"
 
-export default async function airQualityIndex(req: WeatherApiRequest, res: NextApiResponse) {
+export default async function airQualityIndex(
+  req: WeatherApiRequest,
+  res: NextApiResponse,
+) {
   try {
     const params = {
       lat: req.query.lat,
@@ -12,11 +15,12 @@ export default async function airQualityIndex(req: WeatherApiRequest, res: NextA
       appid: appid,
     }
 
-    const { data: aqiFromApi } = await axios.get<AirQualityIndexFromApi>(`${BASE_URL}/air_pollution`, { params })
+    const { data: aqiFromApi } = await axios.get<AirQualityIndexFromApi>(
+      `${BASE_URL}/air_pollution`,
+      { params },
+    )
 
-    res.json({
-      airQualityIndex: toAirQualityIndex(aqiFromApi),
-    })
+    res.json(toAirQualityIndex(aqiFromApi))
   } catch (err) {
     res.status(500).json({ err })
   }
