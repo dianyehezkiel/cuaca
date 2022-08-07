@@ -1,4 +1,4 @@
-import { Box, Progress, Text } from '@chakra-ui/react'
+import { Box, Progress, Skeleton, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import React from 'react'
 import { setAirQualityIndex, useStateValue } from '../state'
@@ -44,7 +44,181 @@ export default function AirQualityIndex({
 
   if (error) return <h1>Something bad happened</h1>
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) {
+    return (
+      <Box
+        display="flex"
+        flexDir="column"
+        w="100%"
+        alignItems="center"
+        borderRadius={8}
+        bgColor="whiteAlpha.400"
+        shadow="lg"
+      >
+        <Skeleton
+          h={5}
+          w={40}
+          my={1.5}
+          startColor="blue.100"
+          endColor="blue.300"
+        />
+        <Box
+          mb={2}
+          px={4}
+          display="flex"
+          w="100%"
+          gap={4}
+          alignItems="center"
+          justifyContent="space-evenly"
+        >
+          <Box
+            textAlign="center"
+            flex="0 0 30%"
+            display="flex"
+            flexDir="column"
+            alignItems="center"
+          >
+            <Skeleton
+              h={16}
+              w={12}
+              my={2}
+              startColor="blue.100"
+              endColor="blue.300"
+            />
+            <Skeleton
+              h={4}
+              w={20}
+              my={0.5}
+              startColor="blue.100"
+              endColor="blue.300"
+            />
+          </Box>
+          <Box flex="0 0 60%" display="flex" flexDir="column">
+            <Box display="flex" h={5} justifyContent="space-between">
+              <Skeleton h={4} w={6} startColor="blue.100" endColor="blue.300" />
+              <Skeleton
+                h={4}
+                w={16}
+                startColor="blue.100"
+                endColor="blue.300"
+              />
+              <Skeleton h={4} w={6} startColor="blue.100" endColor="blue.300" />
+            </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              height={20}
+              gap={1}
+            >
+              <Box flex="1" display="flex" flexDir="column" height="100%">
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+              </Box>
+              <Box flex="4" display="flex" flexDir="column" height="100%">
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+              </Box>
+              <Box flex="1" display="flex" flexDir="column" height="100%">
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+                <Box h={5} display="flex" alignItems="center">
+                  <Skeleton
+                    h={4}
+                    w="100%"
+                    startColor="blue.100"
+                    endColor="blue.300"
+                  />
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    )
+  }
 
   const aqiDescription = () => {
     switch (airQualityIndex[id].aqiData.main.aqi) {
@@ -127,10 +301,10 @@ export default function AirQualityIndex({
           flexDir="column"
           alignItems="center"
         >
-          <Text fontSize="6xl" fontWeight="medium" lineHeight="110%">
+          <Text fontSize="6xl" fontWeight="medium" lineHeight="5rem">
             {airQualityIndex[id].aqiData.main.aqi}
           </Text>
-          <Text fontSize="xs" fontWeight="medium">
+          <Text fontSize="xs" fontWeight="medium" lineHeight={5}>
             {aqiDescription()}
           </Text>
         </Box>
