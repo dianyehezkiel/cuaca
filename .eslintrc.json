@@ -2,14 +2,28 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "no-unused-vars": "error",
-    "semi": ["warn", "never"],
-    "comma-dangle": ["warn", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "always-multiline"
-    }],
-    "no-trailing-spaces": "warn"
+    "semi": [
+      "warn",
+      "never"
+    ],
+    "comma-dangle": [
+      "warn",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
+    ],
+    "no-trailing-spaces": "warn",
+    "max-len": [
+      "warn",
+      {
+        "code": 80,
+        "tabWidth": 2,
+        "comments": 65
+      }
+    ]
   }
 }
