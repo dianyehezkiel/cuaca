@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const SprinkleNightIcon = createIcon({
   displayName: 'SprinkleNightIcon',
@@ -23,7 +23,7 @@ const SprinkleNightIcon = createIcon({
 	c0.18-0.18,0.27-0.4,0.27-0.66c0-0.43-0.31-0.97-0.93-1.62l-0.25,0.27c-0.18,0.2-0.35,0.43-0.5,0.7
 	C14.58,14.71,14.51,14.93,14.51,15.09z M17.56,8.77c0.35-0.57,0.8-1,1.34-1.29c0.54-0.29,1.12-0.44,1.72-0.44
 	c0.12,0,0.21,0.01,0.27,0.02v0.3c0,0.96,0.26,1.87,0.79,2.74s1.25,1.52,2.18,1.97c-0.16,0.38-0.41,0.72-0.75,1.03
-	c-0.93-0.76-1.99-1.14-3.21-1.14h-0.33C19.27,10.65,18.6,9.59,17.56,8.77z`
+	c-0.93-0.76-1.99-1.14-3.21-1.14h-0.33C19.27,10.65,18.6,9.59,17.56,8.77z`,
 })
 
 export default SprinkleNightIcon

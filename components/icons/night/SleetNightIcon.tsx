@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const SleetNightIcon = createIcon({
   displayName: 'SleetNightIcon',
@@ -35,7 +35,7 @@ const SleetNightIcon = createIcon({
 	c-0.16,0.16-0.35,0.23-0.59,0.23c-0.24,0-0.43-0.08-0.58-0.24C16.97,21.6,16.88,21.41,16.88,21.18z M17.59,8.82
 	c1.04,0.85,1.7,1.9,1.98,3.16h0.33c1.23,0,2.3,0.39,3.22,1.18c0.34-0.31,0.59-0.65,0.76-1.04c-0.62-0.3-1.15-0.7-1.61-1.21
 	c-0.45-0.51-0.79-1.06-1.02-1.66c-0.23-0.6-0.34-1.22-0.34-1.86V7.09h-0.22c-0.62,0-1.21,0.15-1.77,0.45
-	C18.36,7.84,17.92,8.27,17.59,8.82z`
+	C18.36,7.84,17.92,8.27,17.59,8.82z`,
 })
 
 export default SleetNightIcon

@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const SunnyOvercastDayIcon = createIcon({
   displayName: 'SunnyOvercastDayIcon',
@@ -26,7 +26,7 @@ const SunnyOvercastDayIcon = createIcon({
 	c0.18-0.17,0.26-0.39,0.26-0.67c0-0.28-0.1-0.51-0.29-0.69s-0.42-0.28-0.7-0.28c-0.26,0-0.49,0.1-0.68,0.29L20.94,6.4
 	C20.76,6.58,20.67,6.81,20.67,7.09z M23.25,13.43c0,0.27,0.09,0.49,0.28,0.67s0.43,0.26,0.72,0.26h1.69c0.27,0,0.5-0.09,0.69-0.27
 	s0.29-0.4,0.29-0.66c0-0.29-0.09-0.53-0.28-0.71s-0.42-0.28-0.69-0.28h-1.69c-0.29,0-0.53,0.09-0.72,0.28
-	C23.35,12.89,23.25,13.13,23.25,13.43z`
+	C23.35,12.89,23.25,13.13,23.25,13.43z`,
 })
 
 export default SunnyOvercastDayIcon

@@ -1,4 +1,4 @@
-import { AirQualityIndexType, AirQualityIndexFromApi } from "../types/AirQualityIndex";
+import { AirQualityIndexType, AirQualityIndexFromApi } from "../types"
 
 const toAirQualityIndex = (apiData: AirQualityIndexFromApi): AirQualityIndexType => {
   return {

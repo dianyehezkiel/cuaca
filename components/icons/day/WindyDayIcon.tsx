@@ -1,4 +1,4 @@
-import { createIcon } from "@chakra-ui/react";
+import { createIcon } from "@chakra-ui/react"
 
 const WindyDayIcon = createIcon({
   displayName: 'WindyDayIcon',
@@ -33,7 +33,7 @@ const WindyDayIcon = createIcon({
 	c-0.18,0.16-0.38,0.24-0.6,0.24c-0.23,0-0.41-0.08-0.57-0.24C22.63,6.52,22.56,6.32,22.56,6.08z M24.82,11.55
 	c0-0.24,0.08-0.44,0.24-0.62c0.16-0.16,0.35-0.24,0.57-0.24h2.02c0.23,0,0.43,0.09,0.61,0.26s0.26,0.37,0.26,0.6
 	c0,0.23-0.09,0.43-0.26,0.6c-0.18,0.17-0.38,0.25-0.61,0.25h-2.02c-0.23,0-0.42-0.08-0.58-0.25C24.89,11.99,24.82,11.79,24.82,11.55
-	z`
+	z`,
 })
 
 export default WindyDayIcon

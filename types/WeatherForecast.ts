@@ -1,4 +1,4 @@
-import {CloudData, Coordinate, MainInfo, RainData, SnowData, WeatherData, WindData} from "./UniversalTypes";
+import {CloudData, Coordinate, MainInfo, RainData, SnowData, WeatherData, WindData} from "./UniversalTypes"
 
 interface ForecastMainInfo extends MainInfo {
   temp_kf: number;
