@@ -22,12 +22,9 @@ let timeoutId: NodeJS.Timer
 
 export default function SearchBar() {
   const [searchResult, setSearchResult] = React.useState<LocationType[]>([])
-  // const [editing, setEditing] = React.useState(false)
   const [searchQuery, setSearchQuery] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
-
-  console.info('----RENDER SearchBar----')
 
   React.useEffect(() => {
     const searchLocation = async (q: string) => {
