@@ -1,45 +1,50 @@
-import { Coordinate } from "../types/UniversalTypes"
-import { State } from "./state"
-import { v4 as uuidV4 } from 'uuid'
-import { CurrentWeatherType } from "../types/CurrentWeather"
-import { WeatherForecastType } from "../types/WeatherForecast"
-import { AirQualityIndexType } from "../types/AirQualityIndex"
+import { Coordinate } from '../types/UniversalTypes'
+import { State } from './state'
+import { CurrentWeatherType } from '../types/CurrentWeather'
+import { WeatherForecastType } from '../types/WeatherForecast'
+import { AirQualityIndexType } from '../types/AirQualityIndex'
 
 export type Action =
-  {
-    type: "SET_COORDINATE";
-    payload: Coordinate;
-  } | {
-    type: "SET_CURRENT_WEATHER";
-    payload: {
-      id: string;
-      data: CurrentWeatherType;
+  | {
+      type: 'SET_COORDINATE';
+      payload: {
+        id: string;
+        data: Coordinate;
+      };
+    }
+  | {
+      type: 'SET_CURRENT_WEATHER';
+      payload: {
+        id: string;
+        data: CurrentWeatherType;
+      };
+    }
+  | {
+      type: 'SET_WEATHER_FORECAST';
+      payload: {
+        id: string;
+        data: WeatherForecastType;
+      };
+    }
+  | {
+      type: 'SET_AQI';
+      payload: {
+        id: string;
+        data: AirQualityIndexType;
+      };
     };
-  } | {
-    type: "SET_WEATHER_FORECAST";
-    payload: {
-      id: string;
-      data: WeatherForecastType;
-    };
-  } | {
-    type: "SET_AQI";
-    payload: {
-      id: string;
-      data: AirQualityIndexType;
-    };
-  }
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case "SET_COORDINATE":
-      const id = uuidV4()
+    case 'SET_COORDINATE':
       return {
         ...state,
         coordinate: {
-          [id]: { ...action.payload },
+          ...state.coordinate,
+          [action.payload.id]: action.payload.data,
         },
       }
-    case "SET_CURRENT_WEATHER":
+    case 'SET_CURRENT_WEATHER':
       return {
         ...state,
         currentWeather: {
@@ -47,7 +52,7 @@ export const reducer = (state: State, action: Action): State => {
           [action.payload.id]: action.payload.data,
         },
       }
-    case "SET_WEATHER_FORECAST":
+    case 'SET_WEATHER_FORECAST':
       return {
         ...state,
         weatherForecast: {
@@ -55,7 +60,7 @@ export const reducer = (state: State, action: Action): State => {
           [action.payload.id]: action.payload.data,
         },
       }
-    case "SET_AQI":
+    case 'SET_AQI':
       return {
         ...state,
         airQualityIndex: {
@@ -68,30 +73,39 @@ export const reducer = (state: State, action: Action): State => {
   }
 }
 
-export const setCoordinate = (coordinate: Coordinate): Action => {
+export const setCoordinate = (id: string, data: Coordinate): Action => {
   return {
-    type: "SET_COORDINATE",
-    payload: coordinate,
-  }
-}
-
-export const setCurrentWeather = (id: string, data: CurrentWeatherType): Action => {
-  return {
-    type: "SET_CURRENT_WEATHER",
+    type: 'SET_COORDINATE',
     payload: { id, data },
   }
 }
 
-export const setWeatherForecast = (id: string, data: WeatherForecastType): Action => {
+export const setCurrentWeather = (
+  id: string,
+  data: CurrentWeatherType,
+): Action => {
   return {
-    type: "SET_WEATHER_FORECAST",
+    type: 'SET_CURRENT_WEATHER',
     payload: { id, data },
   }
 }
 
-export const setAirQualityIndex = (id: string, data: AirQualityIndexType): Action => {
+export const setWeatherForecast = (
+  id: string,
+  data: WeatherForecastType,
+): Action => {
   return {
-    type: "SET_AQI",
+    type: 'SET_WEATHER_FORECAST',
+    payload: { id, data },
+  }
+}
+
+export const setAirQualityIndex = (
+  id: string,
+  data: AirQualityIndexType,
+): Action => {
+  return {
+    type: 'SET_AQI',
     payload: { id, data },
   }
 }

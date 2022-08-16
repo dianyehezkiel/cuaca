@@ -16,15 +16,19 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import React from 'react'
-import { LocationType } from '../types'
+import { setCoordinate, useStateValue } from '../state'
+import { Coordinate, LocationType } from '../types'
 
 let timeoutId: NodeJS.Timer
 
 export default function SearchBar() {
+  const [, dispatch] = useStateValue()
   const [searchResult, setSearchResult] = React.useState<LocationType[]>([])
   const [searchQuery, setSearchQuery] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
+  const [editablePreviewValue, setEditablePreviewValue] =
+    React.useState('Medan, ID')
 
   React.useEffect(() => {
     const searchLocation = async (q: string) => {
@@ -55,6 +59,16 @@ export default function SearchBar() {
       setSearchResult([])
     }
   }, [searchQuery])
+
+  const handleChange = (value: string) => {
+    setSearchQuery(value)
+    setEditablePreviewValue(value)
+  }
+
+  const selectLocation = (fullCityName: string, coordinate: Coordinate) => {
+    setEditablePreviewValue(fullCityName)
+    dispatch(setCoordinate('default', coordinate))
+  }
 
   const EditableControls = () => {
     const { isEditing, getCancelButtonProps, getEditButtonProps } =
@@ -94,6 +108,7 @@ export default function SearchBar() {
   }
 
   const SearchResult = () => {
+
     if (error) return <Text>Something wrong happened</Text>
     if (!searchQuery) return <Text>Enter any location</Text>
     if (loading) return <CircularProgress isIndeterminate />
@@ -101,11 +116,21 @@ export default function SearchBar() {
       return <Text>{`Cannot find "${searchQuery}"`}</Text>
 
     return (
-      <List w="100%">
+      <List w="100%" zIndex={100}>
         {searchResult.map((location, index) => (
           <Box key={`${index}-${location.name}`}>
             <ListItem>
-              <Button w="100%" textAlign="left" variant="unstyled">
+              <Button
+                onClick={() =>
+                  selectLocation(`${location.name}, ${location.country}`, {
+                    lat: location.lat,
+                    lon: location.lon,
+                  })
+                }
+                w="100%"
+                textAlign="left"
+                variant="unstyled"
+              >
                 {`${location.name}, ${location.country}`}
               </Button>
             </ListItem>
@@ -117,7 +142,7 @@ export default function SearchBar() {
   }
 
   const SearchResultWrapper = () => {
-    const { isEditing } = useEditableControls()
+    const { isEditing, getSubmitButtonProps } = useEditableControls()
 
     return isEditing ? (
       <Box
@@ -131,6 +156,7 @@ export default function SearchBar() {
         top={8}
         shadow="lg"
         justifyContent="center"
+        {...getSubmitButtonProps()}
       >
         <SearchResult />
       </Box>
@@ -147,7 +173,8 @@ export default function SearchBar() {
       gap={2}
       borderRadius={8}
       textAlign="center"
-      defaultValue="Kota Medan, ID"
+      defaultValue="Medan, ID"
+      value={editablePreviewValue}
       fontSize="md"
       fontWeight="medium"
       isPreviewFocusable={false}
@@ -156,8 +183,11 @@ export default function SearchBar() {
       <Input
         as={EditableInput}
         size="sm"
-        onChange={(e) => setSearchQuery(e.target.value)}
-        _focus={{borderRadius: 8, bg: 'whiteAlpha.300'}}
+        onChange={(e) => handleChange(e.target.value)}
+        autoComplete='false'
+        name='hidden'
+        aria-label='location input'
+        _focus={{ borderRadius: 8, bg: 'whiteAlpha.300' }}
       />
       <EditableControls />
       <SearchResultWrapper />
