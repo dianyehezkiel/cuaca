@@ -6,7 +6,7 @@ type LocalNames = {
 
 export interface LocationFromApi extends Coordinate {
   name: string;
-  local_names: LocalNames;
+  local_names?: LocalNames;
   country: string;
   state?: string;
 }
