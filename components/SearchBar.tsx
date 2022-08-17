@@ -22,13 +22,14 @@ import { Coordinate, LocationType } from '../types'
 let timeoutId: NodeJS.Timer
 
 export default function SearchBar() {
-  const [, dispatch] = useStateValue()
+  const [{ coordinate }, dispatch] = useStateValue()
   const [searchResult, setSearchResult] = React.useState<LocationType[]>([])
   const [searchQuery, setSearchQuery] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const [editablePreviewValue, setEditablePreviewValue] =
     React.useState('Medan, ID')
+  const [cityName, setCityName] = React.useState(editablePreviewValue)
 
   React.useEffect(() => {
     const searchLocation = async (q: string) => {
@@ -60,6 +61,32 @@ export default function SearchBar() {
     }
   }, [searchQuery])
 
+  React.useEffect(() => {
+    const cityNameFromStorage = localStorage.getItem('city')
+    const cityLatFromStorage = localStorage.getItem('lat')
+    const cityLonFromStorage = localStorage.getItem('lon')
+    if (
+      cityNameFromStorage &&
+      cityName !== cityNameFromStorage
+    ) {
+      setEditablePreviewValue(cityNameFromStorage)
+      setCityName(cityNameFromStorage)
+    }
+
+    if (
+      cityLatFromStorage &&
+      coordinate['default'].lat.toString() !== cityLatFromStorage &&
+      cityLonFromStorage &&
+      coordinate['default'].lon.toString() !== cityLonFromStorage
+    ) {
+      dispatch(setCoordinate('default', {
+        lat: Number(cityLatFromStorage),
+        lon: Number(cityLonFromStorage),
+      }))
+    }
+
+  }, [cityName, coordinate, dispatch])
+
   const handleChange = (value: string) => {
     setSearchQuery(value)
     setEditablePreviewValue(value)
@@ -67,7 +94,11 @@ export default function SearchBar() {
 
   const selectLocation = (fullCityName: string, coordinate: Coordinate) => {
     setEditablePreviewValue(fullCityName)
+    setCityName(fullCityName)
     dispatch(setCoordinate('default', coordinate))
+    localStorage.setItem('city', fullCityName)
+    localStorage.setItem('lat', coordinate.lat.toString())
+    localStorage.setItem('lon', coordinate.lon.toString())
   }
 
   const EditableControls = () => {
@@ -108,7 +139,6 @@ export default function SearchBar() {
   }
 
   const SearchResult = () => {
-
     if (error) return <Text>Something wrong happened</Text>
     if (!searchQuery) return <Text>Enter any location</Text>
     if (loading) return <CircularProgress isIndeterminate />
@@ -173,7 +203,6 @@ export default function SearchBar() {
       gap={2}
       borderRadius={8}
       textAlign="center"
-      defaultValue="Medan, ID"
       value={editablePreviewValue}
       fontSize="md"
       fontWeight="medium"
@@ -184,9 +213,9 @@ export default function SearchBar() {
         as={EditableInput}
         size="sm"
         onChange={(e) => handleChange(e.target.value)}
-        autoComplete='false'
-        name='hidden'
-        aria-label='location input'
+        autoComplete="false"
+        name="hidden"
+        aria-label="location input"
         _focus={{ borderRadius: 8, bg: 'whiteAlpha.300' }}
       />
       <EditableControls />
