@@ -20,5 +20,7 @@ export default async function geoCoding(
     { params },
   )
 
-  res.json(locationFromApi.map((l) => toLocation(l)))
+  res.json(locationFromApi.map((l) => {
+    return toLocation(l)
+  }))
 }

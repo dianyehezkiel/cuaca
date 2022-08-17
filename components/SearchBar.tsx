@@ -16,15 +16,20 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import React from 'react'
-import { LocationType } from '../types'
+import { setCoordinate, useStateValue } from '../state'
+import { Coordinate, LocationType } from '../types'
 
 let timeoutId: NodeJS.Timer
 
 export default function SearchBar() {
+  const [{ coordinate }, dispatch] = useStateValue()
   const [searchResult, setSearchResult] = React.useState<LocationType[]>([])
   const [searchQuery, setSearchQuery] = React.useState<string | null>(null)
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
+  const [editablePreviewValue, setEditablePreviewValue] =
+    React.useState('Medan, ID')
+  const [cityName, setCityName] = React.useState(editablePreviewValue)
 
   React.useEffect(() => {
     const searchLocation = async (q: string) => {
@@ -55,6 +60,46 @@ export default function SearchBar() {
       setSearchResult([])
     }
   }, [searchQuery])
+
+  React.useEffect(() => {
+    const cityNameFromStorage = localStorage.getItem('city')
+    const cityLatFromStorage = localStorage.getItem('lat')
+    const cityLonFromStorage = localStorage.getItem('lon')
+    if (
+      cityNameFromStorage &&
+      cityName !== cityNameFromStorage
+    ) {
+      setEditablePreviewValue(cityNameFromStorage)
+      setCityName(cityNameFromStorage)
+    }
+
+    if (
+      cityLatFromStorage &&
+      coordinate['default'].lat.toString() !== cityLatFromStorage &&
+      cityLonFromStorage &&
+      coordinate['default'].lon.toString() !== cityLonFromStorage
+    ) {
+      dispatch(setCoordinate('default', {
+        lat: Number(cityLatFromStorage),
+        lon: Number(cityLonFromStorage),
+      }))
+    }
+
+  }, [cityName, coordinate, dispatch])
+
+  const handleChange = (value: string) => {
+    setSearchQuery(value)
+    setEditablePreviewValue(value)
+  }
+
+  const selectLocation = (fullCityName: string, coordinate: Coordinate) => {
+    setEditablePreviewValue(fullCityName)
+    setCityName(fullCityName)
+    dispatch(setCoordinate('default', coordinate))
+    localStorage.setItem('city', fullCityName)
+    localStorage.setItem('lat', coordinate.lat.toString())
+    localStorage.setItem('lon', coordinate.lon.toString())
+  }
 
   const EditableControls = () => {
     const { isEditing, getCancelButtonProps, getEditButtonProps } =
@@ -101,11 +146,21 @@ export default function SearchBar() {
       return <Text>{`Cannot find "${searchQuery}"`}</Text>
 
     return (
-      <List w="100%">
+      <List w="100%" zIndex={100}>
         {searchResult.map((location, index) => (
           <Box key={`${index}-${location.name}`}>
             <ListItem>
-              <Button w="100%" textAlign="left" variant="unstyled">
+              <Button
+                onClick={() =>
+                  selectLocation(`${location.name}, ${location.country}`, {
+                    lat: location.lat,
+                    lon: location.lon,
+                  })
+                }
+                w="100%"
+                textAlign="left"
+                variant="unstyled"
+              >
                 {`${location.name}, ${location.country}`}
               </Button>
             </ListItem>
@@ -117,7 +172,7 @@ export default function SearchBar() {
   }
 
   const SearchResultWrapper = () => {
-    const { isEditing } = useEditableControls()
+    const { isEditing, getSubmitButtonProps } = useEditableControls()
 
     return isEditing ? (
       <Box
@@ -131,6 +186,7 @@ export default function SearchBar() {
         top={8}
         shadow="lg"
         justifyContent="center"
+        {...getSubmitButtonProps()}
       >
         <SearchResult />
       </Box>
@@ -147,7 +203,7 @@ export default function SearchBar() {
       gap={2}
       borderRadius={8}
       textAlign="center"
-      defaultValue="Kota Medan, ID"
+      value={editablePreviewValue}
       fontSize="md"
       fontWeight="medium"
       isPreviewFocusable={false}
@@ -156,8 +212,11 @@ export default function SearchBar() {
       <Input
         as={EditableInput}
         size="sm"
-        onChange={(e) => setSearchQuery(e.target.value)}
-        _focus={{borderRadius: 8, bg: 'whiteAlpha.300'}}
+        onChange={(e) => handleChange(e.target.value)}
+        autoComplete="false"
+        name="hidden"
+        aria-label="location input"
+        _focus={{ borderRadius: 8, bg: 'whiteAlpha.300' }}
       />
       <EditableControls />
       <SearchResultWrapper />

@@ -12,7 +12,7 @@ export default function Footer () {
         py={6}
         borderTop='2px'
         bg='white'
-        borderTopColor='blue.500'
+        borderTopColor='blue.300'
         justifyContent='center'
         alignItems='center'
       >

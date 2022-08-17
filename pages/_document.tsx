@@ -7,7 +7,15 @@ class Document extends NextDocument {
   render() {
     return (
       <Html lang='en'>
-        <Head />
+        <Head>
+          <meta
+            name="description"
+            content={
+              'Cuaca weather app by Dian Yehezkiel. Powered by Open Weather API.'
+            }
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <body style={{minHeight: '100vh'}}>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
