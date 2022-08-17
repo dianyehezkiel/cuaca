@@ -14,16 +14,17 @@ export default function Home() {
     <div>
       <Head>
         <title>Cuaca</title>
-        <meta
-          name="description"
-          content={
-            'Cuaca weather app by Dian Yehezkiel. Powered by Open Weather API.'
-          }
-        />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box as="main" minH="100vh" pt={16} pb={24} px={4} bg="blue.300">
+      <Box
+        as="main"
+        minH="100vh"
+        pt={16}
+        pb={24}
+        px={4}
+        bg="blue.200"
+        userSelect="none"
+      >
         <Container
           p={0}
           maxW="container.md"
