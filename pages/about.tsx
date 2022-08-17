@@ -24,7 +24,6 @@ export default function About() {
         >
           <Box w={32} h={32} pos="relative" rounded={'full'} overflow="hidden">
             <Image
-              style={{ objectFit: 'cover' }}
               src={profilePic}
               loading="lazy"
               alt="picture of dian"
